@@ -31,7 +31,7 @@ const facilityImages = [
 export default function FacilitiesPage() {
   return (
     <>
-      <section className="relative bg-[#1a1a2e] pt-32 pb-20">
+      <section className="relative bg-[#1a1a2e] pt-36 pb-20">
         <div className="absolute inset-0 opacity-30">
           <Image
             src="https://images.squarespace-cdn.com/content/v1/5cb9fbd5c2ff6135a509b1a3/1558963623690-8674XMXBFTTAKZ0AFPS9/A+B74A0244.jpg"

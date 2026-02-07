@@ -20,179 +20,109 @@ const services = [
     title: "Basic Obedience Training",
     image: "https://images.squarespace-cdn.com/content/v1/5cb9fbd5c2ff6135a509b1a3/93fe0e01-280e-4341-b9ef-69c5e2560aa0/web+1.jpg",
     description: "Build a strong foundation of communication and respect between you and your dog.",
-    details: [
-      "Establish clear communication through structured training sessions",
-      "Core commands including sit, stay, come, heel, down, and place",
-      "Leash manners and walking etiquette for stress-free outings",
-      "Housebreaking and crate training fundamentals",
-      "Impulse control exercises to build patience and self-discipline",
-      "Door manners, greeting guests, and household etiquette",
-    ],
+    details: ["Structured training sessions for clear communication", "Core commands: sit, stay, come, heel, down, place", "Leash manners and walking etiquette", "Housebreaking and crate training", "Impulse control and patience building", "Door manners and household etiquette"],
     ideal: "Perfect for puppies and dogs of any age who need foundational training.",
   },
   {
     id: "behavioral-modification",
     title: "Behavioral Modification",
     image: "https://images.squarespace-cdn.com/content/v1/5cb9fbd5c2ff6135a509b1a3/8bb42adb-bafe-4a4a-b5f4-0e9bd5d0aebb/web+2.jpg",
-    description: "Specialized training for dogs with behavioral challenges that go beyond basic obedience.",
-    details: [
-      "Assessment and treatment of aggression toward people or other animals",
-      "Anxiety and fear-based behavior management including separation anxiety",
-      "Reactivity reduction for on-leash and off-leash environments",
-      "Excessive barking, jumping, and destructive behavior solutions",
-      "Customized behavior plans tailored to your dog's specific triggers",
-      "Follow-up support to ensure lasting behavioral change",
-    ],
-    ideal: "Designed for dogs who struggle with behavioral issues. We work with dogs that other trainers have given up on.",
+    description: "Specialized training for dogs with behavioral challenges beyond basic obedience.",
+    details: ["Aggression assessment and treatment", "Anxiety and separation anxiety management", "Reactivity reduction for all environments", "Excessive barking and destructive behavior", "Custom behavior plans for specific triggers", "Follow-up support for lasting change"],
+    ideal: "For dogs with behavioral issues. We work with dogs others have given up on.",
   },
   {
     id: "service-dog",
     title: "Service Dog Training",
     image: "https://images.squarespace-cdn.com/content/v1/5cb9fbd5c2ff6135a509b1a3/d711da4e-e2fe-4323-9c7a-d3bf40e15734/web+3.jpg",
     description: "Professional training to prepare dogs for service work and public access.",
-    details: [
-      "Task-specific training tailored to the handler's individual needs",
-      "Public access training ensuring reliable behavior in all environments",
-      "Advanced obedience with high distraction tolerance",
-      "Socialization in diverse environments including stores and transport",
-      "ADA rights education for handlers",
-      "Ongoing support and refresher training availability",
-    ],
+    details: ["Task-specific training for handler needs", "Public access training in all environments", "Advanced obedience with distraction tolerance", "Diverse environment socialization", "ADA rights education for handlers", "Ongoing support and refresher training"],
     ideal: "For individuals who need a trained service dog to perform specific tasks.",
   },
   {
     id: "specialty",
     title: "Specialty Training",
     image: "https://images.squarespace-cdn.com/content/v1/5cb9fbd5c2ff6135a509b1a3/033b530b-5536-44aa-b001-9be608f84b8d/web+4.jpg",
-    description: "Advanced programs for families seeking the highest level of training and control.",
-    details: [
-      "Advanced off-leash obedience and recall in high-distraction environments",
-      "Confidence building for timid or shy dogs",
-      "Scent work and nose work training for mental stimulation",
-      "Therapy dog preparation and certification readiness",
-      "Sport-specific training including agility foundations",
-      "Customized programs based on your lifestyle and goals",
-    ],
-    ideal: "Ideal for dogs and owners who want to go beyond basic training.",
+    description: "Advanced programs for the highest level of training and control.",
+    details: ["Advanced off-leash obedience and recall", "Confidence building for timid dogs", "Scent work and nose work training", "Therapy dog preparation", "Agility foundations", "Custom programs for your lifestyle"],
+    ideal: "For dogs and owners who want to go beyond basic training.",
   },
   {
     id: "protection",
     title: "Protection Training",
     image: "https://images.squarespace-cdn.com/content/v1/5cb9fbd5c2ff6135a509b1a3/1558963610622-YZ54V7ZZ4CQVHZA8S9N5/A+B74A0225.jpg",
-    description: "Develop your dog's natural guarding instincts while maintaining obedience and control.",
-    details: [
-      "Controlled alert and deterrent training using natural protective instincts",
-      "Advanced obedience foundation before protection work begins",
-      "On/off switch training ensuring reliability in social situations",
-      "Property and personal protection scenarios",
-      "Handler protection and escort training",
-      "Ongoing maintenance and skill refreshers",
-    ],
-    ideal: "For owners seeking a well-trained protection dog that is both a reliable guardian and a well-mannered family companion.",
+    description: "Develop natural guarding instincts while maintaining obedience.",
+    details: ["Controlled alert and deterrent training", "Advanced obedience foundation first", "On/off switch for social reliability", "Property and personal protection", "Handler protection and escort training", "Ongoing maintenance and refreshers"],
+    ideal: "For owners seeking a reliable guardian and well-mannered family companion.",
   },
   {
     id: "group",
     title: "Group Training Classes",
     image: "https://images.squarespace-cdn.com/content/v1/5cb9fbd5c2ff6135a509b1a3/1559932025860-72F27QB8B6CVJ2W48A7Q/IMG_5547.jpeg",
-    description: "Learn alongside other dogs and owners in a supportive, structured environment.",
-    details: [
-      "Socialization in a controlled group setting with professional guidance",
-      "Core obedience commands practiced with real-world distractions",
-      "Owner education on body language, timing, and consistency",
-      "Small class sizes to ensure individual attention",
-      "Multiple skill levels from beginner to advanced",
-      "Affordable alternative to private training sessions",
-    ],
-    ideal: "Great for dogs who need socialization and owners who benefit from learning in a group setting.",
+    description: "Learn alongside other dogs in a supportive, structured environment.",
+    details: ["Controlled group socialization", "Real-world distraction training", "Body language and timing education", "Small class sizes for attention", "Beginner to advanced levels", "Affordable alternative to private sessions"],
+    ideal: "Great for socialization and owners who learn best in a group.",
   },
 ];
 
 export default function ServicesPage() {
   return (
     <>
-      <section className="relative bg-[#1a1a2e] pt-32 pb-20">
+      <section className="relative bg-[#1a1a2e] pt-36 pb-20">
         <div className="absolute inset-0 opacity-20">
-          <Image
-            src="https://images.squarespace-cdn.com/content/v1/5cb9fbd5c2ff6135a509b1a3/1558963623690-8674XMXBFTTAKZ0AFPS9/A+B74A0244.jpg"
-            alt=""
-            fill
-            className="object-cover"
-          />
+          <Image src="https://images.squarespace-cdn.com/content/v1/5cb9fbd5c2ff6135a509b1a3/1558963623690-8674XMXBFTTAKZ0AFPS9/A+B74A0244.jpg" alt="" fill className="object-cover" />
         </div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
             <p className="text-[#DAA520] font-semibold text-sm uppercase tracking-wider mb-3">What We Offer</p>
-            <h1 className="text-4xl sm:text-5xl font-bold text-white mb-6">
-              Our Training Services
-            </h1>
-            <p className="text-xl text-gray-300 leading-relaxed">
-              Comprehensive training programs tailored to every dog and owner. From basic
-              obedience to advanced specialty work, our expert trainers deliver serious results.
-            </p>
+            <h1 className="text-4xl sm:text-5xl font-bold text-white mb-6">Our Training Services</h1>
+            <p className="text-xl text-gray-300 leading-relaxed">Comprehensive training programs tailored to every dog and owner. From basic obedience to advanced specialty work, our expert trainers deliver serious results.</p>
           </div>
         </div>
       </section>
 
       <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="space-y-24">
-            {services.map((service, index) => (
-              <div key={service.id} id={service.id} className="grid lg:grid-cols-2 gap-12 items-center">
-                <div className={index % 2 === 1 ? "lg:order-2" : ""}>
-                  <h2 className="text-2xl sm:text-3xl font-bold text-[#1a1a2e] mb-4">{service.title}</h2>
-                  <p className="text-lg text-gray-600 mb-6 leading-relaxed">{service.description}</p>
-                  <ul className="space-y-3 mb-6">
-                    {service.details.map((detail) => (
-                      <li key={detail} className="flex items-start gap-3">
-                        <CheckCircle className="w-5 h-5 text-[#B8860B] flex-shrink-0 mt-0.5" />
-                        <span className="text-gray-600 text-sm leading-relaxed">{detail}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <div className="bg-gray-50 rounded-xl p-5 border border-gray-100 mb-6">
-                    <p className="text-sm font-semibold text-[#1a1a2e] mb-1">Who Is This For?</p>
-                    <p className="text-gray-600 text-sm leading-relaxed">{service.ideal}</p>
-                  </div>
-                  <Link href="/contact" className="inline-flex items-center gap-2 bg-[#B8860B] hover:bg-[#DAA520] text-white px-6 py-3 rounded-full text-sm font-semibold transition-colors">
-                    Get Started <ArrowRight className="w-4 h-4" />
-                  </Link>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-24">
+          {services.map((service, index) => (
+            <div key={service.id} id={service.id} className="grid lg:grid-cols-2 gap-12 items-center">
+              <div className={index % 2 === 1 ? "lg:order-2" : ""}>
+                <h2 className="text-2xl sm:text-3xl font-bold text-[#1a1a2e] mb-4">{service.title}</h2>
+                <p className="text-lg text-gray-600 mb-6 leading-relaxed">{service.description}</p>
+                <ul className="space-y-3 mb-6">
+                  {service.details.map((d) => (
+                    <li key={d} className="flex items-start gap-3">
+                      <CheckCircle className="w-5 h-5 text-[#B8860B] flex-shrink-0 mt-0.5" />
+                      <span className="text-gray-600 text-sm">{d}</span>
+                    </li>
+                  ))}
+                </ul>
+                <div className="bg-gray-50 rounded-xl p-5 border border-gray-100 mb-6">
+                  <p className="text-sm font-semibold text-[#1a1a2e] mb-1">Who Is This For?</p>
+                  <p className="text-gray-600 text-sm">{service.ideal}</p>
                 </div>
-                <div className={`relative aspect-[4/3] rounded-2xl overflow-hidden shadow-xl ${index % 2 === 1 ? "lg:order-1" : ""}`}>
-                  <Image
-                    src={service.image}
-                    alt={service.title}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
+                <Link href="/contact" className="inline-flex items-center gap-2 bg-[#B8860B] hover:bg-[#DAA520] text-white px-6 py-3 rounded-full text-sm font-semibold transition-colors">
+                  Get Started <ArrowRight className="w-4 h-4" />
+                </Link>
               </div>
-            ))}
-          </div>
+              <div className={`relative aspect-[4/3] rounded-2xl overflow-hidden shadow-xl ${index % 2 === 1 ? "lg:order-1" : ""}`}>
+                <Image src={service.image} alt={service.title} fill className="object-cover" />
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 
       <section className="relative py-20">
         <div className="absolute inset-0">
-          <Image
-            src="https://images.squarespace-cdn.com/content/v1/5cb9fbd5c2ff6135a509b1a3/969046be-c3f0-4eb5-96c8-42d43c0c6986/vet+recon.png"
-            alt=""
-            fill
-            className="object-cover"
-          />
+          <Image src="https://images.squarespace-cdn.com/content/v1/5cb9fbd5c2ff6135a509b1a3/969046be-c3f0-4eb5-96c8-42d43c0c6986/vet+recon.png" alt="" fill className="object-cover" />
           <div className="absolute inset-0 bg-[#1a1a2e]/90" />
         </div>
         <div className="relative max-w-4xl mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold text-white mb-6">Not Sure Which Program Is Right for Your Dog?</h2>
-          <p className="text-gray-300 mb-8 text-lg">
-            Contact us for a free consultation. Our team will assess your dog&apos;s needs and recommend the perfect training program.
-          </p>
+          <h2 className="text-3xl font-bold text-white mb-6">Not Sure Which Program Is Right?</h2>
+          <p className="text-gray-300 mb-8 text-lg">Contact us for a free consultation. We&apos;ll assess your dog&apos;s needs and recommend the perfect program.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/contact" className="inline-flex items-center gap-2 bg-[#B8860B] hover:bg-[#DAA520] text-white px-8 py-4 rounded-full font-semibold transition-colors">
-              Schedule a Consultation <ArrowRight className="w-5 h-5" />
-            </Link>
-            <a href="tel:8664364959" className="inline-flex items-center gap-2 bg-white/10 backdrop-blur border border-white/20 hover:bg-white/20 text-white px-8 py-4 rounded-full font-semibold transition-colors">
-              <Phone className="w-5 h-5" /> (866) 436-4959
-            </a>
+            <Link href="/contact" className="inline-flex items-center gap-2 bg-[#B8860B] hover:bg-[#DAA520] text-white px-8 py-4 rounded-full font-semibold transition-colors">Schedule a Consultation <ArrowRight className="w-5 h-5" /></Link>
+            <a href="tel:8664364959" className="inline-flex items-center gap-2 bg-white/10 backdrop-blur border border-white/20 hover:bg-white/20 text-white px-8 py-4 rounded-full font-semibold transition-colors"><Phone className="w-5 h-5" /> (866) 436-4959</a>
           </div>
         </div>
       </section>

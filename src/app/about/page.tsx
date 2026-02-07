@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <>
-      <section className="relative bg-[#1a1a2e] pt-32 pb-20">
+      <section className="relative bg-[#1a1a2e] pt-36 pb-20">
         <div className="absolute inset-0 opacity-20">
           <Image
             src="https://images.squarespace-cdn.com/content/v1/5cb9fbd5c2ff6135a509b1a3/1558963686115-VQQ2IJS5KLZ05KM1TXXT/A+B74A0234.jpg"

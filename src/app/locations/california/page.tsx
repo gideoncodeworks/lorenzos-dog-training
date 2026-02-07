@@ -34,7 +34,7 @@ const trainers: { name: string; city: string; image?: string }[] = [
 export default function CaliforniaPage() {
   return (
     <>
-      <section className="bg-[#1a1a2e] pt-32 pb-20">
+      <section className="bg-[#1a1a2e] pt-36 pb-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
             <div className="flex items-center gap-2 text-[#DAA520] mb-4">

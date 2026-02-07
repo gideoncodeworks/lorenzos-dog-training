@@ -23,7 +23,7 @@ const trainers = [
 export default function OhioPage() {
   return (
     <>
-      <section className="relative bg-[#1a1a2e] pt-32 pb-20">
+      <section className="relative bg-[#1a1a2e] pt-36 pb-20">
         <div className="absolute inset-0 opacity-20">
           <Image
             src="https://images.squarespace-cdn.com/content/v1/5cb9fbd5c2ff6135a509b1a3/1559932027952-3J2P71J0GOPON0S6QVFP/IMG_5532.jpeg"
