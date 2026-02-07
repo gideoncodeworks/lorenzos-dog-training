@@ -2,23 +2,37 @@
 
 import { useState } from "react";
 import { Send, CheckCircle } from "lucide-react";
+import { submitForm } from "@/lib/cms";
 
 export default function ContactForm() {
-  const [submitted, setSubmitted] = useState(false);
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    service: "",
-    message: "",
-  });
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [errorMsg, setErrorMsg] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSubmitted(true);
+    setStatus("loading");
+
+    const formData = new FormData(e.currentTarget);
+    const result = await submitForm({
+      formType: "contact",
+      name: formData.get("name") as string,
+      email: formData.get("email") as string,
+      phone: formData.get("phone") as string,
+      message: formData.get("message") as string,
+      data: {
+        service: formData.get("service") as string,
+      },
+    });
+
+    if (result.success) {
+      setStatus("success");
+    } else {
+      setErrorMsg(result.error || "Something went wrong. Please try again.");
+      setStatus("error");
+    }
   };
 
-  if (submitted) {
+  if (status === "success") {
     return (
       <div className="bg-green-50 border border-green-200 rounded-2xl p-8 text-center">
         <CheckCircle className="w-12 h-12 text-green-500 mx-auto mb-4" />
@@ -36,21 +50,21 @@ export default function ContactForm() {
       <div className="grid sm:grid-cols-2 gap-5">
         <div>
           <label htmlFor="name" className="block text-sm font-medium text-[#1a1a2e] mb-2">Full Name *</label>
-          <input type="text" id="name" required value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#B8860B] focus:ring-2 focus:ring-[#B8860B]/20 outline-none transition-all text-[#1a1a2e]" placeholder="Your name" />
+          <input type="text" id="name" name="name" required className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#B8860B] focus:ring-2 focus:ring-[#B8860B]/20 outline-none transition-all text-[#1a1a2e]" placeholder="Your name" />
         </div>
         <div>
           <label htmlFor="email" className="block text-sm font-medium text-[#1a1a2e] mb-2">Email Address *</label>
-          <input type="email" id="email" required value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#B8860B] focus:ring-2 focus:ring-[#B8860B]/20 outline-none transition-all text-[#1a1a2e]" placeholder="your@email.com" />
+          <input type="email" id="email" name="email" required className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#B8860B] focus:ring-2 focus:ring-[#B8860B]/20 outline-none transition-all text-[#1a1a2e]" placeholder="your@email.com" />
         </div>
       </div>
       <div className="grid sm:grid-cols-2 gap-5">
         <div>
           <label htmlFor="phone" className="block text-sm font-medium text-[#1a1a2e] mb-2">Phone Number</label>
-          <input type="tel" id="phone" value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#B8860B] focus:ring-2 focus:ring-[#B8860B]/20 outline-none transition-all text-[#1a1a2e]" placeholder="(555) 555-5555" />
+          <input type="tel" id="phone" name="phone" className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#B8860B] focus:ring-2 focus:ring-[#B8860B]/20 outline-none transition-all text-[#1a1a2e]" placeholder="(555) 555-5555" />
         </div>
         <div>
           <label htmlFor="service" className="block text-sm font-medium text-[#1a1a2e] mb-2">Service Interested In</label>
-          <select id="service" value={formData.service} onChange={(e) => setFormData({ ...formData, service: e.target.value })} className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#B8860B] focus:ring-2 focus:ring-[#B8860B]/20 outline-none transition-all text-[#1a1a2e] bg-white">
+          <select id="service" name="service" className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#B8860B] focus:ring-2 focus:ring-[#B8860B]/20 outline-none transition-all text-[#1a1a2e] bg-white">
             <option value="">Select a service</option>
             <option value="basic">Basic Obedience</option>
             <option value="behavioral">Behavioral Modification</option>
@@ -64,11 +78,14 @@ export default function ContactForm() {
       </div>
       <div>
         <label htmlFor="message" className="block text-sm font-medium text-[#1a1a2e] mb-2">Tell Us About Your Dog *</label>
-        <textarea id="message" required rows={5} value={formData.message} onChange={(e) => setFormData({ ...formData, message: e.target.value })} className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#B8860B] focus:ring-2 focus:ring-[#B8860B]/20 outline-none transition-all text-[#1a1a2e] resize-none" placeholder="Tell us about your dog's breed, age, and any behavioral concerns..." />
+        <textarea id="message" name="message" required rows={5} className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#B8860B] focus:ring-2 focus:ring-[#B8860B]/20 outline-none transition-all text-[#1a1a2e] resize-none" placeholder="Tell us about your dog's breed, age, and any behavioral concerns..." />
       </div>
-      <button type="submit" className="w-full flex items-center justify-center gap-2 bg-[#B8860B] hover:bg-[#DAA520] text-white px-8 py-4 rounded-xl font-semibold transition-colors duration-200 text-lg">
+      {status === "error" && (
+        <p className="text-red-500 text-sm text-center">{errorMsg}</p>
+      )}
+      <button type="submit" disabled={status === "loading"} className="w-full flex items-center justify-center gap-2 bg-[#B8860B] hover:bg-[#DAA520] disabled:opacity-60 text-white px-8 py-4 rounded-xl font-semibold transition-colors duration-200 text-lg">
         <Send className="w-5 h-5" />
-        Send Message
+        {status === "loading" ? "Sending..." : "Send Message"}
       </button>
       <p className="text-sm text-gray-500 text-center">
         We typically respond within 24 hours. For immediate assistance, call{" "}

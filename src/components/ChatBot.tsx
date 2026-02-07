@@ -2,12 +2,19 @@
 
 import { useState, useRef, useEffect } from "react";
 import { MessageCircle, X, Send, Bot, User } from "lucide-react";
+import { useSiteData } from "@/lib/site-context";
 
 interface Message {
-  role: "bot" | "user";
+  id: string;
+  role: "user" | "assistant";
   content: string;
+  timestamp: Date;
 }
 
+const CMS_URL = process.env.NEXT_PUBLIC_CMS_URL || "https://dashboard.gideoncode.com";
+const SITE_DOMAIN = process.env.NEXT_PUBLIC_SITE_DOMAIN || "";
+
+// Fallback local knowledge for when CMS chat is unavailable
 const businessKnowledge: Record<string, { keywords: string[]; response: string }> = {
   services: {
     keywords: ["service", "training", "program", "offer", "what do you", "help", "teach"],
@@ -27,23 +34,23 @@ const businessKnowledge: Record<string, { keywords: string[]; response: string }
   },
   about: {
     keywords: ["about", "history", "story", "who", "founded", "lorenzo", "founder", "experience", "how long"],
-    response: `**Lorenzo's Dog Training Team** was founded in **1987** — that's over 40 years of professional dog training!\n\nOur founder **Lorenzo** began rescuing strays at age 6. By age 10, his parents sent him to train with professionals. He funded his college education through in-home dog training.\n\nLorenzo studied various training methods in the late 1970s-80s and synthesized the best elements into his own distinctive, proven approach.\n\nToday, we have **50+ trainers across 11 states**, all trained at our 3,700 sq. ft. Cleveland headquarters. Our mission: **keeping dogs out of shelters and in happy homes**.`,
+    response: `**Lorenzo's Dog Training Team** was founded in **1987** — that's over 40 years of professional dog training!\n\nOur founder **Lorenzo** began rescuing strays at age 6. By age 10, his parents sent him to train with professionals. He funded his college education through in-home dog training.\n\nToday, we have **50+ trainers across 11 states**, all trained at our 3,700 sq. ft. Cleveland headquarters. Our mission: **keeping dogs out of shelters and in happy homes**.`,
   },
   behavioral: {
     keywords: ["aggress", "bite", "bark", "anxious", "anxiety", "fear", "reactive", "behavior", "problem", "bad", "destructive", "separation"],
-    response: `We specialize in behavioral challenges — it's one of our core strengths! We work with dogs that other trainers have given up on.\n\n**Common issues we address:**\n- Aggression toward people or other animals\n- Separation anxiety\n- Fear-based behaviors\n- Reactivity on leash or around triggers\n- Excessive barking\n- Destructive behavior\n- Resource guarding\n- Jumping and impulse control issues\n\nOur **Behavioral Modification** program includes a thorough assessment, a customized behavior plan, owner education, and follow-up support.\n\nContact us at **(866) 436-4959** for a free consultation!`,
+    response: `We specialize in behavioral challenges — it's one of our core strengths! We work with dogs that other trainers have given up on.\n\n**Common issues we address:**\n- Aggression toward people or other animals\n- Separation anxiety\n- Fear-based behaviors\n- Reactivity on leash or around triggers\n- Excessive barking\n- Destructive behavior\n\nContact us at **(866) 436-4959** for a free consultation!`,
   },
   puppy: {
     keywords: ["puppy", "young", "baby", "new dog", "just got", "small"],
-    response: `Congratulations on your new puppy! Early training is one of the best investments you can make.\n\nOur **Basic Obedience** program covers:\n- Housebreaking and crate training\n- Basic commands (sit, stay, come, heel, down)\n- Leash manners and walking etiquette\n- Impulse control and patience building\n- Socialization foundations\n- Door manners and greeting guests\n\nWe work with dogs of **any age** — the earlier you start, the stronger the foundation. But it's never too late!\n\nCall **(866) 436-4959** to schedule a puppy training consultation.`,
+    response: `Congratulations on your new puppy! Early training is one of the best investments you can make.\n\nOur **Basic Obedience** program covers:\n- Housebreaking and crate training\n- Basic commands (sit, stay, come, heel, down)\n- Leash manners and walking etiquette\n- Impulse control and patience building\n- Socialization foundations\n\nCall **(866) 436-4959** to schedule a puppy training consultation.`,
   },
   facility: {
     keywords: ["facility", "building", "headquarters", "training center", "obstacle", "boarding"],
-    response: `Our headquarters features a **3,700 sq. ft. training facility** in Cleveland, Ohio.\n\n**Facility highlights:**\n- Professional obstacle course\n- Indoor and outdoor boarding areas\n- Hands-on training spaces\n- Trainer development academy\n\nThis is where all our trainers learn Lorenzo's proven methodology through intensive, supervised work before being placed nationwide.\n\n**Address:** 4805 Orchard Rd., Garfield Heights, OH 44128\n\nInterested in visiting? Contact us to schedule a tour!`,
+    response: `Our headquarters features a **3,700 sq. ft. training facility** in Cleveland, Ohio.\n\n**Facility highlights:**\n- Professional obstacle course\n- Indoor and outdoor boarding areas\n- Hands-on training spaces\n- Trainer development academy\n\n**Address:** 4805 Orchard Rd., Garfield Heights, OH 44128\n\nInterested in visiting? Contact us to schedule a tour!`,
   },
 };
 
-function getBotResponse(input: string): string {
+function getLocalResponse(input: string): string {
   const lower = input.toLowerCase();
 
   for (const [, knowledge] of Object.entries(businessKnowledge)) {
@@ -53,50 +60,129 @@ function getBotResponse(input: string): string {
   }
 
   if (/^(hi|hello|hey|good morning|good afternoon|howdy|greetings)/i.test(lower)) {
-    return `Hello! Welcome to Lorenzo's Dog Training Team!\n\nI'm here to help you learn about our training programs, find a trainer near you, or answer any questions.\n\n**How can I help you today?**\n- Learn about our training programs\n- Find a trainer in your area\n- Get pricing information\n- Hear our story\n\nJust type your question!`;
+    return `Hello! Welcome to Lorenzo's Dog Training Team!\n\nI'm here to help you learn about our training programs, find a trainer near you, or answer any questions.\n\nJust type your question!`;
   }
 
   if (/thank|thanks|appreciate/i.test(lower)) {
-    return `You're welcome! If you have any more questions, feel free to ask!\n\nWhen you're ready, call us at **(866) 436-4959** or visit our Contact page. We look forward to working with you and your dog!`;
+    return `You're welcome! If you have any more questions, feel free to ask!\n\nWhen you're ready, call us at **(866) 436-4959** or visit our Contact page.`;
   }
 
-  return `Thanks for your question! I'd love to help you further.\n\nFor the most detailed answer, I'd recommend:\n- **Calling us** at **(866) 436-4959**\n- **Visiting our Contact page** to send a message\n\nI can tell you about:\n- Our **training programs** and services\n- **Locations** and trainer availability\n- Our **story** and experience\n- **Behavioral issues** your dog may have\n- **Puppy training** options`;
+  return `Thanks for your question! I'd love to help you further.\n\nFor the most detailed answer, I'd recommend:\n- **Calling us** at **(866) 436-4959**\n- **Visiting our Contact page** to send a message\n\nI can tell you about our **training programs**, **locations**, **story**, **behavioral issues**, or **puppy training**.`;
 }
 
 export default function ChatBot() {
+  const siteData = useSiteData();
   const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      role: "bot",
-      content: `Hi there! I'm the Lorenzo's Dog Training Team assistant. I can help you learn about our training programs, find a trainer near you, or answer questions about our services.\n\nWhat can I help you with today?`,
-    },
-  ]);
+  const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [sessionId, setSessionId] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
+  // Initialize session
+  useEffect(() => {
+    const stored = localStorage.getItem(`chatbot_session_${SITE_DOMAIN}`);
+    if (stored) {
+      setSessionId(stored);
+    } else {
+      const newSession = crypto.randomUUID();
+      localStorage.setItem(`chatbot_session_${SITE_DOMAIN}`, newSession);
+      setSessionId(newSession);
+    }
+  }, []);
+
+  // Auto-scroll
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  const handleSend = () => {
-    if (!input.trim()) return;
-    const userMessage = input.trim();
-    setInput("");
-    setMessages((prev) => [...prev, { role: "user", content: userMessage }]);
+  // Welcome message on first open
+  useEffect(() => {
+    if (isOpen && messages.length === 0) {
+      setMessages([
+        {
+          id: "welcome",
+          role: "assistant",
+          content: `Hi! Welcome to ${siteData.brand.name}. How can I help you today?`,
+          timestamp: new Date(),
+        },
+      ]);
+    }
+  }, [isOpen, siteData.brand.name, messages.length]);
 
-    setTimeout(() => {
-      const response = getBotResponse(userMessage);
-      setMessages((prev) => [...prev, { role: "bot", content: response }]);
-    }, 500);
+  const sendMessage = async () => {
+    if (!input.trim() || isLoading) return;
+
+    const userMessage: Message = {
+      id: crypto.randomUUID(),
+      role: "user",
+      content: input.trim(),
+      timestamp: new Date(),
+    };
+
+    setMessages((prev) => [...prev, userMessage]);
+    setInput("");
+    setIsLoading(true);
+
+    try {
+      // Try CMS chat endpoint first
+      const res = await fetch(`${CMS_URL}/api/public/${SITE_DOMAIN}/chat`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          message: userMessage.content,
+          sessionId,
+          history: messages.slice(-10),
+        }),
+      });
+
+      if (!res.ok) throw new Error("Chat API unavailable");
+
+      const data = await res.json();
+
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: crypto.randomUUID(),
+          role: "assistant",
+          content: data.response,
+          timestamp: new Date(),
+        },
+      ]);
+    } catch {
+      // Fallback to local knowledge base
+      const localResponse = getLocalResponse(userMessage.content);
+      setTimeout(() => {
+        setMessages((prev) => [
+          ...prev,
+          {
+            id: crypto.randomUUID(),
+            role: "assistant",
+            content: localResponse,
+            timestamp: new Date(),
+          },
+        ]);
+      }, 300);
+    } finally {
+      setIsLoading(false);
+    }
   };
+
+  if (process.env.NEXT_PUBLIC_CHATBOT_ENABLED === "false") {
+    return null;
+  }
+
+  const primaryColor = siteData.brand.primaryColor || "#B8860B";
+  const secondaryColor = siteData.brand.secondaryColor || "#1a1a2e";
 
   return (
     <>
       <button
         onClick={() => setIsOpen(!isOpen)}
         className={`fixed bottom-6 right-6 z-50 w-16 h-16 rounded-full shadow-2xl flex items-center justify-center transition-all duration-300 ${
-          isOpen ? "bg-[#1a1a2e] rotate-0" : "bg-[#B8860B] hover:bg-[#DAA520] hover:scale-110"
+          isOpen ? "rotate-0" : "hover:scale-110"
         }`}
+        style={{ backgroundColor: isOpen ? secondaryColor : primaryColor }}
         aria-label={isOpen ? "Close chat" : "Open chat assistant"}
       >
         {isOpen ? <X className="w-6 h-6 text-white" /> : <MessageCircle className="w-7 h-7 text-white" />}
@@ -110,29 +196,37 @@ export default function ChatBot() {
 
       {isOpen && (
         <div className="fixed bottom-24 right-6 z-50 w-[380px] max-w-[calc(100vw-2rem)] bg-white rounded-2xl shadow-2xl border border-gray-200 flex flex-col overflow-hidden" style={{ height: "500px" }}>
-          <div className="bg-[#1a1a2e] px-5 py-4 flex items-center gap-3">
-            <div className="w-10 h-10 bg-[#B8860B] rounded-full flex items-center justify-center">
+          <div className="px-5 py-4 flex items-center gap-3" style={{ backgroundColor: secondaryColor }}>
+            <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ backgroundColor: primaryColor }}>
               <Bot className="w-5 h-5 text-white" />
             </div>
             <div>
-              <h3 className="text-white font-semibold text-sm">Lorenzo&apos;s Assistant</h3>
+              <h3 className="text-white font-semibold text-sm">{siteData.brand.name}</h3>
               <p className="text-green-400 text-xs flex items-center gap-1">
                 <span className="w-2 h-2 bg-green-400 rounded-full inline-block" />
-                Online
+                Usually replies instantly
               </p>
             </div>
           </div>
 
           <div className="flex-1 overflow-y-auto px-4 py-4 space-y-4 bg-gray-50">
-            {messages.map((msg, i) => (
-              <div key={i} className={`flex gap-2 ${msg.role === "user" ? "flex-row-reverse" : ""}`}>
-                <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${msg.role === "bot" ? "bg-[#B8860B]/10" : "bg-[#1a1a2e]"}`}>
-                  {msg.role === "bot" ? <Bot className="w-4 h-4 text-[#B8860B]" /> : <User className="w-4 h-4 text-white" />}
+            {messages.map((msg) => (
+              <div key={msg.id} className={`flex gap-2 ${msg.role === "user" ? "flex-row-reverse" : ""}`}>
+                <div
+                  className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0"
+                  style={{ backgroundColor: msg.role === "assistant" ? `${primaryColor}15` : secondaryColor }}
+                >
+                  {msg.role === "assistant" ? (
+                    <Bot className="w-4 h-4" style={{ color: primaryColor }} />
+                  ) : (
+                    <User className="w-4 h-4 text-white" />
+                  )}
                 </div>
                 <div
                   className={`max-w-[75%] rounded-2xl px-4 py-3 text-sm leading-relaxed ${
-                    msg.role === "bot" ? "bg-white border border-gray-200 text-gray-700" : "bg-[#B8860B] text-white"
+                    msg.role === "assistant" ? "bg-white border border-gray-200 text-gray-700" : "text-white"
                   }`}
+                  style={msg.role === "user" ? { backgroundColor: primaryColor } : undefined}
                   dangerouslySetInnerHTML={{
                     __html: msg.content
                       .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
@@ -141,6 +235,16 @@ export default function ChatBot() {
                 />
               </div>
             ))}
+            {isLoading && (
+              <div className="flex gap-2">
+                <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{ backgroundColor: `${primaryColor}15` }}>
+                  <Bot className="w-4 h-4" style={{ color: primaryColor }} />
+                </div>
+                <div className="bg-white border border-gray-200 rounded-2xl px-4 py-3 text-sm text-gray-400">
+                  Typing...
+                </div>
+              </div>
+            )}
             <div ref={messagesEndRef} />
           </div>
 
@@ -150,14 +254,16 @@ export default function ChatBot() {
                 type="text"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                onKeyDown={(e) => e.key === "Enter" && handleSend()}
-                placeholder="Ask about our training programs..."
-                className="flex-1 px-4 py-2.5 rounded-xl border border-gray-200 focus:border-[#B8860B] focus:ring-2 focus:ring-[#B8860B]/20 outline-none text-sm text-[#1a1a2e]"
+                onKeyDown={(e) => e.key === "Enter" && sendMessage()}
+                placeholder="Type a message..."
+                className="flex-1 px-4 py-2.5 rounded-xl border border-gray-200 outline-none text-sm text-[#1a1a2e]"
+                style={{ borderColor: input ? primaryColor : undefined }}
               />
               <button
-                onClick={handleSend}
-                disabled={!input.trim()}
-                className="w-10 h-10 bg-[#B8860B] hover:bg-[#DAA520] disabled:bg-gray-300 rounded-xl flex items-center justify-center transition-colors"
+                onClick={sendMessage}
+                disabled={isLoading || !input.trim()}
+                className="w-10 h-10 rounded-xl flex items-center justify-center transition-colors disabled:opacity-50"
+                style={{ backgroundColor: primaryColor }}
                 aria-label="Send message"
               >
                 <Send className="w-4 h-4 text-white" />

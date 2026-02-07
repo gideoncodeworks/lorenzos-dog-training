@@ -4,6 +4,8 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ChatBot from "@/components/ChatBot";
+import { Providers } from "@/components/Providers";
+import { getSiteData, fallbackSiteData } from "@/lib/cms";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,84 +17,89 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  metadataBase: new URL("https://lorenzos-dog-training.vercel.app"),
-  title: {
-    default: "Lorenzo's Dog Training Team | Professional Dog Training Since 1987",
-    template: "%s | Lorenzo's Dog Training Team",
-  },
-  description:
-    "Over 40 years of professional dog training excellence. Lorenzo's Dog Training Team offers basic obedience, behavioral modification, service dog training, and specialty programs across 11 states. Serious Training, Serious Results.",
-  keywords: [
-    "dog training",
-    "professional dog trainer",
-    "obedience training",
-    "behavioral modification",
-    "service dog training",
-    "puppy training",
-    "Lorenzo dog training",
-    "dog training Ohio",
-    "dog training California",
-    "dog training Florida",
-    "dog training Texas",
-    "dog training Georgia",
-  ],
-  authors: [{ name: "Lorenzo's Dog Training Team" }],
-  creator: "Lorenzo's Dog Training Team",
-  openGraph: {
-    type: "website",
-    locale: "en_US",
-    url: "https://lorenzos-dog-training.vercel.app",
-    siteName: "Lorenzo's Dog Training Team",
-    title: "Lorenzo's Dog Training Team | Professional Dog Training Since 1987",
-    description:
-      "Over 40 years of professional dog training excellence. Serious Training, Serious Results. Serving 11 states with expert trainers.",
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "Lorenzo's Dog Training Team - Serious Training, Serious Results",
-      },
+export async function generateMetadata(): Promise<Metadata> {
+  const siteData = await getSiteData();
+  const data = siteData || fallbackSiteData;
+
+  return {
+    metadataBase: new URL("https://lorenzos-dog-training.vercel.app"),
+    title: {
+      default: data.seo.defaultMetaTitle || data.brand.name,
+      template: `%s | ${data.brand.name}`,
+    },
+    description: data.seo.defaultMetaDescription,
+    keywords: [
+      "dog training",
+      "professional dog trainer",
+      "obedience training",
+      "behavioral modification",
+      "service dog training",
+      "puppy training",
+      "Lorenzo dog training",
+      "dog training Ohio",
+      "dog training California",
+      "dog training Florida",
+      "dog training Texas",
+      "dog training Georgia",
     ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Lorenzo's Dog Training Team | Professional Dog Training Since 1987",
-    description:
-      "Over 40 years of professional dog training excellence. Serious Training, Serious Results.",
-    images: ["/og-image.png"],
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
+    authors: [{ name: data.brand.name }],
+    creator: data.brand.name,
+    openGraph: {
+      type: "website",
+      locale: "en_US",
+      url: "https://lorenzos-dog-training.vercel.app",
+      siteName: data.brand.name,
+      title: data.seo.defaultMetaTitle || data.brand.name,
+      description:
+        data.seo.defaultMetaDescription ||
+        "Over 40 years of professional dog training excellence.",
+      images: [
+        {
+          url: "/og-image.png",
+          width: 1200,
+          height: 630,
+          alt: `${data.brand.name} - Serious Training, Serious Results`,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: data.seo.defaultMetaTitle || data.brand.name,
+      description: data.seo.defaultMetaDescription || "",
+      images: ["/og-image.png"],
+    },
+    robots: {
       index: true,
       follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
     },
-  },
-  icons: {
-    icon: "/favicon.ico",
-    apple: "/apple-touch-icon.png",
-  },
-};
+    icons: data.seo.favicon
+      ? { icon: data.seo.favicon }
+      : { icon: "/favicon.ico", apple: "/apple-touch-icon.png" },
+  };
+}
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const siteData = await getSiteData();
+  const data = siteData || fallbackSiteData;
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
-    name: "Lorenzo's Dog Training Team",
-    description:
-      "Professional dog training services with over 40 years of experience. Offering basic obedience, behavioral modification, service dog training, and specialty programs.",
+    name: data.brand.name,
+    description: data.seo.defaultMetaDescription,
     url: "https://www.lorenzosdogtrainingteam.com",
-    telephone: "(866) 436-4959",
+    telephone: data.contact.phone,
     address: {
       "@type": "PostalAddress",
       streetAddress: "4805 Orchard Rd.",
@@ -106,11 +113,7 @@ export default function RootLayout({
       "Ohio", "California", "Florida", "Georgia", "Texas",
       "Indiana", "Kansas", "Kentucky", "Massachusetts", "Michigan", "New Hampshire",
     ],
-    sameAs: [
-      "https://www.instagram.com/lorenzosdogtrainingteam/",
-      "https://www.facebook.com/LorenzosDogTrainingTeam/",
-      "https://www.youtube.com/user/mydogtrainingteam",
-    ],
+    sameAs: Object.values(data.socialMedia),
   };
 
   return (
@@ -123,11 +126,20 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <Header />
-        <main>{children}</main>
-        <Footer />
-        <ChatBot />
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        style={{
+          '--primary-color': data.brand.primaryColor || '#B8860B',
+          '--secondary-color': data.brand.secondaryColor || '#1a1a2e',
+          '--accent-color': data.brand.accentColor || '#DAA520',
+        } as React.CSSProperties}
+      >
+        <Providers siteData={data}>
+          <Header />
+          <main>{children}</main>
+          <Footer />
+          <ChatBot />
+        </Providers>
       </body>
     </html>
   );
