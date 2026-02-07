@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Phone, MapPin, Mail } from "lucide-react";
 
 const quickLinks = [
@@ -32,16 +33,13 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           <div>
             <div className="flex items-center space-x-3 mb-6">
-              <div className="w-10 h-10 bg-[#B8860B] rounded-full flex items-center justify-center">
-                <svg viewBox="0 0 100 100" className="w-6 h-6 fill-white">
-                  <path d="M30 85 C30 85 25 70 30 55 C35 40 45 35 50 30 C55 25 65 20 70 25 C75 30 80 40 75 50 C70 60 65 55 60 50 C55 45 50 50 50 55 C50 60 55 70 50 80 C45 90 35 90 30 85 Z" />
-                  <circle cx="68" cy="32" r="4" />
-                </svg>
-              </div>
-              <div>
-                <span className="text-white font-bold text-base block">Lorenzo&apos;s Dog</span>
-                <span className="text-[#B8860B] text-xs font-medium block">Training Team</span>
-              </div>
+              <Image
+                src="https://images.squarespace-cdn.com/content/v1/5cb9fbd5c2ff6135a509b1a3/1555948162251-E76BZTAQEW2CRKQL0RPH/Lorenzo_Logo+white+letters_small.png"
+                alt="Lorenzo's Dog Training Team"
+                width={180}
+                height={60}
+                className="h-14 w-auto object-contain"
+              />
             </div>
             <p className="text-sm leading-relaxed mb-6">
               Over 40 years of keeping dogs out of shelters and in happy homes. Serious Training, Serious Results.
@@ -64,7 +62,7 @@ export default function Footer() {
             <ul className="space-y-3">
               {quickLinks.map((link) => (
                 <li key={link.name}>
-                  <Link href={link.href} className="text-sm hover:text-[#B8860B] transition-colors">
+                  <Link href={link.href} className="text-sm hover:text-[#DAA520] transition-colors">
                     {link.name}
                   </Link>
                 </li>
@@ -77,7 +75,7 @@ export default function Footer() {
             <ul className="space-y-3">
               {serviceLinks.map((link) => (
                 <li key={link.name}>
-                  <Link href={link.href} className="text-sm hover:text-[#B8860B] transition-colors">
+                  <Link href={link.href} className="text-sm hover:text-[#DAA520] transition-colors">
                     {link.name}
                   </Link>
                 </li>
@@ -94,18 +92,18 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="w-5 h-5 text-[#B8860B] flex-shrink-0" />
-                <a href="tel:8664364959" className="text-sm hover:text-[#B8860B] transition-colors">(866) 436-4959</a>
+                <a href="tel:8664364959" className="text-sm hover:text-[#DAA520] transition-colors">(866) 436-4959</a>
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="w-5 h-5 text-[#B8860B] flex-shrink-0" />
-                <a href="mailto:info@lorenzosdogtrainingteam.com" className="text-sm hover:text-[#B8860B] transition-colors">info@lorenzosdogtrainingteam.com</a>
+                <a href="mailto:info@lorenzosdogtrainingteam.com" className="text-sm hover:text-[#DAA520] transition-colors">info@lorenzosdogtrainingteam.com</a>
               </li>
             </ul>
             <div className="mt-6">
               <h4 className="text-white text-sm font-medium mb-3">Locations</h4>
               <div className="flex flex-wrap gap-2">
                 {locationLinks.map((loc) => (
-                  <Link key={loc.name} href={loc.href} className="text-xs bg-white/5 hover:bg-[#B8860B]/20 px-3 py-1.5 rounded-full transition-colors hover:text-[#B8860B]">
+                  <Link key={loc.name} href={loc.href} className="text-xs bg-white/5 hover:bg-[#B8860B]/20 px-3 py-1.5 rounded-full transition-colors hover:text-[#DAA520]">
                     {loc.name}
                   </Link>
                 ))}

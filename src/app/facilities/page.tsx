@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { MapPin, ArrowRight, Building, Users, Award } from "lucide-react";
+import Image from "next/image";
+import { MapPin, ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Our Training Facility - 3,700 Sq Ft Cleveland Headquarters",
@@ -13,14 +14,37 @@ export const metadata: Metadata = {
   },
 };
 
+const facilityImages = [
+  { src: "https://images.squarespace-cdn.com/content/v1/5cb9fbd5c2ff6135a509b1a3/1558963623690-8674XMXBFTTAKZ0AFPS9/A+B74A0244.jpg", alt: "Training session at the facility" },
+  { src: "https://images.squarespace-cdn.com/content/v1/5cb9fbd5c2ff6135a509b1a3/1728938827157-M9J2LNL5G8QGQW3B365E/unnamed+%286%29.jpg", alt: "Facility training area" },
+  { src: "https://images.squarespace-cdn.com/content/v1/5cb9fbd5c2ff6135a509b1a3/1558963602083-136RP1MYDQPX8R354ZZM/A+B74A0221.jpg", alt: "Indoor training space" },
+  { src: "https://images.squarespace-cdn.com/content/v1/5cb9fbd5c2ff6135a509b1a3/1558963610622-YZ54V7ZZ4CQVHZA8S9N5/A+B74A0225.jpg", alt: "Training equipment area" },
+  { src: "https://images.squarespace-cdn.com/content/v1/5cb9fbd5c2ff6135a509b1a3/1558963621663-EMNMD93NW7NRNZ1YCNH7/A+B74A0235.jpg", alt: "Professional training session" },
+  { src: "https://images.squarespace-cdn.com/content/v1/5cb9fbd5c2ff6135a509b1a3/1558963686115-VQQ2IJS5KLZ05KM1TXXT/A+B74A0234.jpg", alt: "Obstacle course area" },
+  { src: "https://images.squarespace-cdn.com/content/v1/5cb9fbd5c2ff6135a509b1a3/1559932027952-3J2P71J0GOPON0S6QVFP/IMG_5532.jpeg", alt: "Hands-on training" },
+  { src: "https://images.squarespace-cdn.com/content/v1/5cb9fbd5c2ff6135a509b1a3/1559932025860-72F27QB8B6CVJ2W48A7Q/IMG_5547.jpeg", alt: "Boarding area" },
+  { src: "https://images.squarespace-cdn.com/content/v1/5cb9fbd5c2ff6135a509b1a3/1560174291606-ZF9J31JUEK66MAKM6NHG/IMG-5555.JPG", alt: "Outdoor training space" },
+  { src: "https://images.squarespace-cdn.com/content/v1/5cb9fbd5c2ff6135a509b1a3/1559932027932-MBM3MBM3KZHK9YFIWKRA/IMG_5721.jpeg", alt: "Training equipment" },
+  { src: "https://images.squarespace-cdn.com/content/v1/5cb9fbd5c2ff6135a509b1a3/1559932028943-ZVBTKUX411JUGPXX0BDJ/IMG_5746.jpeg", alt: "Facility exterior" },
+];
+
 export default function FacilitiesPage() {
   return (
     <>
-      <section className="bg-[#1a1a2e] pt-32 pb-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative bg-[#1a1a2e] pt-32 pb-20">
+        <div className="absolute inset-0 opacity-30">
+          <Image
+            src="https://images.squarespace-cdn.com/content/v1/5cb9fbd5c2ff6135a509b1a3/1558963623690-8674XMXBFTTAKZ0AFPS9/A+B74A0244.jpg"
+            alt=""
+            fill
+            className="object-cover"
+          />
+        </div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
+            <p className="text-[#DAA520] font-semibold text-sm uppercase tracking-wider mb-3">Our Headquarters</p>
             <h1 className="text-4xl sm:text-5xl font-bold text-white mb-6">
-              Our <span className="text-[#B8860B]">Facility</span>
+              Our Facility
             </h1>
             <p className="text-xl text-gray-300 leading-relaxed">
               Our Cleveland, Ohio headquarters is where the magic happens &mdash; a purpose-built
@@ -55,46 +79,72 @@ export default function FacilitiesPage() {
                 through intensive, supervised hands-on work with real dogs and real behavioral
                 challenges.
               </p>
-              <div className="flex items-center gap-3 text-gray-500">
+              <div className="flex items-center gap-3 text-gray-500 mb-8">
                 <MapPin className="w-5 h-5 text-[#B8860B]" />
                 <span>4805 Orchard Rd., Garfield Heights, OH 44128</span>
               </div>
-            </div>
-            <div className="space-y-6">
               <div className="grid grid-cols-2 gap-4">
-                {[
-                  { icon: Building, label: "3,700 Sq Ft", desc: "Training Space" },
-                  { icon: Award, label: "Obstacle Course", desc: "On-Site" },
-                  { icon: Users, label: "Indoor/Outdoor", desc: "Boarding" },
-                  { icon: MapPin, label: "Cleveland, OH", desc: "Headquarters" },
-                ].map((feature) => (
-                  <div key={feature.label} className="bg-gray-50 rounded-2xl p-6 text-center border border-gray-100">
-                    <feature.icon className="w-8 h-8 text-[#B8860B] mx-auto mb-3" />
-                    <div className="font-bold text-[#1a1a2e]">{feature.label}</div>
-                    <div className="text-sm text-gray-500">{feature.desc}</div>
-                  </div>
-                ))}
+                <div className="bg-[#1a1a2e] rounded-xl p-5 text-center">
+                  <div className="text-2xl font-bold text-[#DAA520]">3,700</div>
+                  <div className="text-sm text-gray-400">Square Feet</div>
+                </div>
+                <div className="bg-[#1a1a2e] rounded-xl p-5 text-center">
+                  <div className="text-2xl font-bold text-[#DAA520]">Full</div>
+                  <div className="text-sm text-gray-400">Obstacle Course</div>
+                </div>
+                <div className="bg-[#1a1a2e] rounded-xl p-5 text-center">
+                  <div className="text-2xl font-bold text-[#DAA520]">In/Out</div>
+                  <div className="text-sm text-gray-400">Boarding Areas</div>
+                </div>
+                <div className="bg-[#1a1a2e] rounded-xl p-5 text-center">
+                  <div className="text-2xl font-bold text-[#DAA520]">Trainer</div>
+                  <div className="text-sm text-gray-400">Academy</div>
+                </div>
               </div>
-              <div className="bg-[#1a1a2e] rounded-2xl p-8">
-                <h3 className="text-white font-semibold text-lg mb-4">Trainer Development Center</h3>
-                <p className="text-gray-400 leading-relaxed mb-6">
-                  Our facility doubles as a professional training academy where future
-                  Lorenzo&apos;s trainers undergo intensive preparation before serving
-                  communities nationwide.
-                </p>
-                <Link href="/contact" className="inline-flex items-center gap-2 text-[#B8860B] hover:text-[#DAA520] font-semibold transition-colors text-sm">
-                  Schedule a Visit <ArrowRight className="w-4 h-4" />
-                </Link>
-              </div>
+            </div>
+            <div className="relative aspect-[3/4] rounded-2xl overflow-hidden shadow-2xl">
+              <Image
+                src="https://images.squarespace-cdn.com/content/v1/5cb9fbd5c2ff6135a509b1a3/1558963623690-8674XMXBFTTAKZ0AFPS9/A+B74A0244.jpg"
+                alt="Lorenzo's Dog Training Team facility"
+                fill
+                className="object-cover"
+              />
             </div>
           </div>
         </div>
       </section>
 
-      <section className="py-20 bg-gray-50">
+      {/* Photo Gallery */}
+      <section className="py-24 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <p className="text-[#B8860B] font-semibold text-sm uppercase tracking-wider mb-3">Gallery</p>
+            <h2 className="text-3xl font-bold text-[#1a1a2e]">Inside Our Facility</h2>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {facilityImages.map((img, i) => (
+              <div
+                key={i}
+                className={`relative overflow-hidden rounded-xl shadow-sm hover:shadow-lg transition-shadow ${
+                  i === 0 ? "col-span-2 row-span-2 aspect-square" : "aspect-square"
+                }`}
+              >
+                <Image
+                  src={img.src}
+                  alt={img.alt}
+                  fill
+                  className="object-cover hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-20 bg-[#1a1a2e]">
         <div className="max-w-4xl mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold text-[#1a1a2e] mb-6">Want to See Our Facility in Action?</h2>
-          <p className="text-gray-600 mb-8 text-lg">Schedule a visit to our Cleveland headquarters and see firsthand how we train both dogs and professional trainers.</p>
+          <h2 className="text-3xl font-bold text-white mb-6">Want to See Our Facility in Action?</h2>
+          <p className="text-gray-300 mb-8 text-lg">Schedule a visit to our Cleveland headquarters and see firsthand how we train both dogs and professional trainers.</p>
           <Link href="/contact" className="inline-flex items-center gap-2 bg-[#B8860B] hover:bg-[#DAA520] text-white px-8 py-4 rounded-full font-semibold transition-colors">
             Contact Us <ArrowRight className="w-5 h-5" />
           </Link>

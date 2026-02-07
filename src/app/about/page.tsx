@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Award, Users, MapPin, ArrowRight, Heart } from "lucide-react";
+import Image from "next/image";
+import { ArrowRight, Heart } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Our Story - About Lorenzo's Dog Training Team",
@@ -16,11 +17,20 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <>
-      <section className="bg-[#1a1a2e] pt-32 pb-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative bg-[#1a1a2e] pt-32 pb-20">
+        <div className="absolute inset-0 opacity-20">
+          <Image
+            src="https://images.squarespace-cdn.com/content/v1/5cb9fbd5c2ff6135a509b1a3/1558963686115-VQQ2IJS5KLZ05KM1TXXT/A+B74A0234.jpg"
+            alt=""
+            fill
+            className="object-cover"
+          />
+        </div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
+            <p className="text-[#DAA520] font-semibold text-sm uppercase tracking-wider mb-3">About Us</p>
             <h1 className="text-4xl sm:text-5xl font-bold text-white mb-6">
-              Our <span className="text-[#B8860B]">Story</span>
+              Our Story
             </h1>
             <p className="text-xl text-gray-300 leading-relaxed">
               From rescuing strays on inner-city streets to building a nationwide network
@@ -71,10 +81,16 @@ export default function AboutPage() {
               </div>
             </div>
             <div className="space-y-6">
-              <div className="bg-gradient-to-br from-[#1a1a2e] to-[#2a2a4e] rounded-3xl p-10 text-center">
-                <div className="w-20 h-20 bg-[#B8860B] rounded-full flex items-center justify-center mx-auto mb-6">
-                  <Heart className="w-10 h-10 text-white" />
-                </div>
+              <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-xl">
+                <Image
+                  src="https://images.squarespace-cdn.com/content/v1/5cb9fbd5c2ff6135a509b1a3/4843ad28-7321-43f3-a4f0-4a33f07ae4a2/Lorenzo-Miller-360.jpg"
+                  alt="Lorenzo Miller - Founder"
+                  fill
+                  className="object-cover object-top"
+                />
+              </div>
+              <div className="bg-[#1a1a2e] rounded-2xl p-8 text-center">
+                <Heart className="w-10 h-10 text-[#B8860B] mx-auto mb-4" />
                 <h3 className="text-xl font-bold text-white mb-3">Our Mission</h3>
                 <p className="text-gray-400 leading-relaxed">
                   Keeping dogs out of shelters and in safe, happy homes through professional,
@@ -111,24 +127,47 @@ export default function AboutPage() {
           </h2>
           <div className="grid md:grid-cols-3 gap-8">
             {[
-              { icon: Award, title: "Proven Methodology", description: "Our unique training approach synthesizes the best elements from decades of professional techniques, refined over 40+ years of real-world application with every breed and temperament." },
-              { icon: Users, title: "Expert Trainers", description: "Every trainer in our network undergoes rigorous hands-on training at our Cleveland headquarters before being placed. We develop true dog training professionals." },
-              { icon: MapPin, title: "Nationwide Reach", description: "With trainers across 11 states, we bring Lorenzo's proven training methods directly to your home. No matter where you are, expert dog training is within reach." },
+              {
+                image: "https://images.squarespace-cdn.com/content/v1/5cb9fbd5c2ff6135a509b1a3/93fe0e01-280e-4341-b9ef-69c5e2560aa0/web+1.jpg",
+                title: "Proven Methodology",
+                description: "Our unique training approach synthesizes the best elements from decades of professional techniques, refined over 40+ years of real-world application with every breed and temperament.",
+              },
+              {
+                image: "https://images.squarespace-cdn.com/content/v1/5cb9fbd5c2ff6135a509b1a3/1559932027952-3J2P71J0GOPON0S6QVFP/IMG_5532.jpeg",
+                title: "Expert Trainers",
+                description: "Every trainer undergoes rigorous hands-on training at our Cleveland headquarters before being placed. We develop true dog training professionals.",
+              },
+              {
+                image: "https://images.squarespace-cdn.com/content/v1/5cb9fbd5c2ff6135a509b1a3/1728938827157-M9J2LNL5G8QGQW3B365E/unnamed+%286%29.jpg",
+                title: "Nationwide Reach",
+                description: "With trainers across 11 states, we bring Lorenzo's proven training methods directly to your home. Expert dog training is within reach.",
+              },
             ].map((item) => (
-              <div key={item.title} className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
-                <div className="w-14 h-14 bg-[#B8860B]/10 rounded-xl flex items-center justify-center mb-6">
-                  <item.icon className="w-7 h-7 text-[#B8860B]" />
+              <div key={item.title} className="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+                <div className="relative h-48">
+                  <Image src={item.image} alt={item.title} fill className="object-cover" />
                 </div>
-                <h3 className="text-xl font-bold text-[#1a1a2e] mb-3">{item.title}</h3>
-                <p className="text-gray-600 leading-relaxed">{item.description}</p>
+                <div className="p-8">
+                  <h3 className="text-xl font-bold text-[#1a1a2e] mb-3">{item.title}</h3>
+                  <p className="text-gray-600 leading-relaxed">{item.description}</p>
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="py-20 bg-[#1a1a2e]">
-        <div className="max-w-4xl mx-auto px-4 text-center">
+      <section className="relative py-20">
+        <div className="absolute inset-0">
+          <Image
+            src="https://images.squarespace-cdn.com/content/v1/5cb9fbd5c2ff6135a509b1a3/1558963621663-EMNMD93NW7NRNZ1YCNH7/A+B74A0235.jpg"
+            alt=""
+            fill
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-[#1a1a2e]/90" />
+        </div>
+        <div className="relative max-w-4xl mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold text-white mb-6">
             Ready to Start Your Dog&apos;s Training Journey?
           </h2>
