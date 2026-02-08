@@ -68,62 +68,68 @@ const services = [
 export default function ServicesPage() {
   return (
     <>
-      <section className="relative bg-[#060D3A] pt-36 pb-20">
-        <div className="absolute inset-0 opacity-25">
+      {/* Hero */}
+      <section className="relative bg-[#091353]" style={{ paddingTop: "calc(var(--header-height) + 48px)", paddingBottom: "48px" }}>
+        <div className="absolute inset-0 opacity-20">
           <Image src="https://images.squarespace-cdn.com/content/v1/5cb9fbd5c2ff6135a509b1a3/1558963623690-8674XMXBFTTAKZ0AFPS9/A+B74A0244.jpg" alt="" fill className="object-cover" />
         </div>
-        <div className="absolute inset-0 bg-[#091353]/90" />
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl">
-            <p className="text-[#C8102E] font-semibold text-sm uppercase tracking-wider mb-3">What We Offer</p>
-            <h1 className="text-4xl sm:text-5xl font-bold text-white mb-6">Our Training Services</h1>
-            <p className="text-xl text-gray-300 leading-relaxed">Comprehensive training programs tailored to every dog and owner. From basic obedience to advanced specialty work, our expert trainers deliver serious results.</p>
+        <div className="relative z-10 container-site">
+          <div className="max-w-2xl">
+            <p className="section-label">What We Offer</p>
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">Our Training Services</h1>
+            <p className="text-lg text-gray-300 leading-relaxed">
+              Comprehensive training programs tailored to every dog and owner. From basic obedience to advanced specialty work, our expert trainers deliver serious results.
+            </p>
           </div>
         </div>
       </section>
 
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-24">
+      {/* Services List */}
+      <section className="section-padding bg-white">
+        <div className="container-site space-y-16 lg:space-y-20">
           {services.map((service, index) => (
-            <div key={service.id} id={service.id} className="grid lg:grid-cols-2 gap-12 items-center">
+            <div key={service.id} id={service.id} className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
               <div className={index % 2 === 1 ? "lg:order-2" : ""}>
-                <h2 className="text-2xl sm:text-3xl font-bold text-[#091353] mb-4">{service.title}</h2>
+                <h2 className="text-2xl lg:text-3xl font-bold text-[#091353] mb-4">{service.title}</h2>
                 <p className="text-lg text-gray-600 mb-6 leading-relaxed">{service.description}</p>
                 <ul className="space-y-3 mb-6">
                   {service.details.map((d) => (
                     <li key={d} className="flex items-start gap-3">
                       <CheckCircle className="w-5 h-5 text-[#C8102E] flex-shrink-0 mt-0.5" />
-                      <span className="text-gray-600 text-sm">{d}</span>
+                      <span className="text-gray-600">{d}</span>
                     </li>
                   ))}
                 </ul>
-                <div className="bg-white rounded-md p-5 border border-[#e5e7eb] shadow-sm mb-6">
+                <div className="card mb-6">
                   <p className="text-sm font-semibold text-[#091353] mb-1">Who Is This For?</p>
-                  <p className="text-gray-600 text-sm">{service.ideal}</p>
+                  <p className="text-gray-600">{service.ideal}</p>
                 </div>
-                <Link href="/contact" className="inline-flex items-center gap-2 bg-[#C8102E] hover:bg-[#A00D24] text-white px-6 py-3 rounded-md text-sm font-semibold transition-colors shadow-md">
+                <Link href="/contact" className="btn btn-primary">
                   Get Started <ArrowRight className="w-4 h-4" />
                 </Link>
               </div>
-              <div className={`relative aspect-[4/3] rounded-lg overflow-hidden shadow-2xl ${index % 2 === 1 ? "lg:order-1" : ""}`}>
-                <Image src={service.image} alt={service.title} fill className="object-cover" />
+              <div className={`aspect-[4/3] rounded-xl overflow-hidden ${index % 2 === 1 ? "lg:order-1" : ""}`}>
+                <Image src={service.image} alt={service.title} width={800} height={600} className="object-cover w-full h-full" />
               </div>
             </div>
           ))}
         </div>
       </section>
 
-      <section className="relative py-20">
-        <div className="absolute inset-0">
-          <Image src="https://images.squarespace-cdn.com/content/v1/5cb9fbd5c2ff6135a509b1a3/969046be-c3f0-4eb5-96c8-42d43c0c6986/vet+recon.png" alt="" fill className="object-cover" />
-          <div className="absolute inset-0 bg-[#060D3A]/90" />
-        </div>
-        <div className="relative max-w-4xl mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold text-white mb-6">Not Sure Which Program Is Right?</h2>
-          <p className="text-gray-300 mb-8 text-lg">Contact us for a free consultation. We&apos;ll assess your dog&apos;s needs and recommend the perfect program.</p>
+      {/* CTA */}
+      <section className="section-padding bg-[#C8102E]">
+        <div className="container-site text-center">
+          <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">Not Sure Which Program Is Right?</h2>
+          <p className="text-lg text-white/80 mb-8 max-w-2xl mx-auto">
+            Contact us for a free consultation. We&apos;ll assess your dog&apos;s needs and recommend the perfect program.
+          </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/contact" className="inline-flex items-center gap-2 bg-[#C8102E] hover:bg-[#A00D24] text-white px-8 py-4 rounded-md font-semibold transition-colors shadow-lg">Schedule a Consultation <ArrowRight className="w-5 h-5" /></Link>
-            <a href="tel:8664364959" className="inline-flex items-center gap-2 bg-white/10 backdrop-blur border border-white/25 hover:bg-white/20 text-white px-8 py-4 rounded-md font-semibold transition-colors"><Phone className="w-5 h-5" /> (866) 436-4959</a>
+            <Link href="/contact" className="btn btn-lg bg-white text-[#C8102E] hover:bg-gray-100">
+              Schedule a Consultation <ArrowRight className="w-5 h-5" />
+            </Link>
+            <a href="tel:8664364959" className="btn btn-outline btn-lg text-white border-white/40">
+              <Phone className="w-5 h-5" /> (866) 436-4959
+            </a>
           </div>
         </div>
       </section>

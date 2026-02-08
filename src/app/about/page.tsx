@@ -17,8 +17,9 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <>
-      <section className="relative bg-[#060D3A] pt-36 pb-20">
-        <div className="absolute inset-0 opacity-25">
+      {/* Hero */}
+      <section className="relative bg-[#091353]" style={{ paddingTop: "calc(var(--header-height) + 48px)", paddingBottom: "48px" }}>
+        <div className="absolute inset-0 opacity-20">
           <Image
             src="https://images.squarespace-cdn.com/content/v1/5cb9fbd5c2ff6135a509b1a3/1558963686115-VQQ2IJS5KLZ05KM1TXXT/A+B74A0234.jpg"
             alt=""
@@ -26,14 +27,13 @@ export default function AboutPage() {
             className="object-cover"
           />
         </div>
-        <div className="absolute inset-0 bg-[#091353]/90" />
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl">
-            <p className="text-[#C8102E] font-semibold text-sm uppercase tracking-wider mb-3">About Us</p>
-            <h1 className="text-4xl sm:text-5xl font-bold text-white mb-6">
+        <div className="relative z-10 container-site">
+          <div className="max-w-2xl">
+            <p className="section-label">About Us</p>
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
               Our Story
             </h1>
-            <p className="text-xl text-gray-300 leading-relaxed">
+            <p className="text-lg text-gray-300 leading-relaxed">
               From rescuing strays on inner-city streets to building a nationwide network
               of professional trainers &mdash; this is the story of Lorenzo&apos;s Dog Training Team.
             </p>
@@ -41,14 +41,15 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-16 items-start">
+      {/* Founder Story */}
+      <section className="section-padding bg-white">
+        <div className="container-site">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
             <div>
-              <h2 className="text-3xl font-bold text-[#091353] mb-8">
+              <h2 className="section-title">
                 The Man Behind the <span className="text-[#C8102E]">Mission</span>
               </h2>
-              <div className="space-y-6 text-gray-600 leading-relaxed">
+              <div className="space-y-4 text-gray-600 leading-relaxed">
                 <p>
                   Lorenzo&apos;s passion for dogs began at the age of six, when he started rescuing
                   strays in his inner-city neighborhood. His parents, recognizing his extraordinary
@@ -82,36 +83,37 @@ export default function AboutPage() {
               </div>
             </div>
             <div className="space-y-6">
-              <div className="relative aspect-[4/3] rounded-lg overflow-hidden shadow-2xl">
+              <div className="aspect-[4/3] rounded-xl overflow-hidden">
                 <Image
                   src="https://images.squarespace-cdn.com/content/v1/5cb9fbd5c2ff6135a509b1a3/4843ad28-7321-43f3-a4f0-4a33f07ae4a2/Lorenzo-Miller-360.jpg"
                   alt="Lorenzo Miller - Founder"
-                  fill
-                  className="object-cover object-top"
+                  width={600}
+                  height={450}
+                  className="object-cover object-top w-full h-full"
                 />
               </div>
-              <div className="bg-[#091353] rounded-lg p-8 text-center shadow-lg">
+              <div className="bg-[#091353] rounded-xl p-8 text-center">
                 <Heart className="w-10 h-10 text-[#C8102E] mx-auto mb-4" />
                 <h3 className="text-xl font-bold text-white mb-3">Our Mission</h3>
-                <p className="text-gray-400 leading-relaxed">
+                <p className="text-blue-200/70 leading-relaxed">
                   Keeping dogs out of shelters and in safe, happy homes through professional,
                   compassionate training that transforms both dogs and their owners.
                 </p>
               </div>
               <div className="grid grid-cols-2 gap-4">
-                <div className="bg-white rounded-lg p-6 text-center border border-[#e5e7eb] shadow-sm">
+                <div className="card text-center">
                   <div className="text-3xl font-bold text-[#C8102E] mb-1">1987</div>
                   <div className="text-sm text-gray-600">Founded</div>
                 </div>
-                <div className="bg-white rounded-lg p-6 text-center border border-[#e5e7eb] shadow-sm">
+                <div className="card text-center">
                   <div className="text-3xl font-bold text-[#C8102E] mb-1">11</div>
                   <div className="text-sm text-gray-600">States Served</div>
                 </div>
-                <div className="bg-white rounded-lg p-6 text-center border border-[#e5e7eb] shadow-sm">
+                <div className="card text-center">
                   <div className="text-3xl font-bold text-[#C8102E] mb-1">50+</div>
                   <div className="text-sm text-gray-600">Trainers</div>
                 </div>
-                <div className="bg-white rounded-lg p-6 text-center border border-[#e5e7eb] shadow-sm">
+                <div className="card text-center">
                   <div className="text-3xl font-bold text-[#C8102E] mb-1">1000s</div>
                   <div className="text-sm text-gray-600">Dogs Trained</div>
                 </div>
@@ -121,9 +123,10 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="py-24 bg-[#F5F7FA]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-[#091353] text-center mb-16">
+      {/* What Sets Us Apart */}
+      <section className="section-padding bg-gray-50">
+        <div className="container-site">
+          <h2 className="section-title text-center mb-12">
             What Sets Us <span className="text-[#C8102E]">Apart</span>
           </h2>
           <div className="grid md:grid-cols-3 gap-8">
@@ -144,11 +147,11 @@ export default function AboutPage() {
                 description: "With trainers across 11 states, we bring Lorenzo's proven training methods directly to your home. Expert dog training is within reach.",
               },
             ].map((item) => (
-              <div key={item.title} className="bg-white rounded-lg overflow-hidden shadow-md border border-[#e5e7eb]">
+              <div key={item.title} className="card card-elevated overflow-hidden p-0">
                 <div className="relative h-48">
                   <Image src={item.image} alt={item.title} fill className="object-cover" />
                 </div>
-                <div className="p-8">
+                <div className="p-6">
                   <h3 className="text-xl font-bold text-[#091353] mb-3">{item.title}</h3>
                   <p className="text-gray-600 leading-relaxed">{item.description}</p>
                 </div>
@@ -158,24 +161,16 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="relative py-20">
-        <div className="absolute inset-0">
-          <Image
-            src="https://images.squarespace-cdn.com/content/v1/5cb9fbd5c2ff6135a509b1a3/1558963621663-EMNMD93NW7NRNZ1YCNH7/A+B74A0235.jpg"
-            alt=""
-            fill
-            className="object-cover"
-          />
-          <div className="absolute inset-0 bg-[#060D3A]/90" />
-        </div>
-        <div className="relative max-w-4xl mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold text-white mb-6">
+      {/* CTA */}
+      <section className="section-padding bg-[#C8102E]">
+        <div className="container-site text-center">
+          <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">
             Ready to Start Your Dog&apos;s Training Journey?
           </h2>
-          <p className="text-gray-300 mb-8 text-lg">
+          <p className="text-lg text-white/80 mb-8 max-w-2xl mx-auto">
             Join the thousands of families who have trusted Lorenzo&apos;s Dog Training Team.
           </p>
-          <Link href="/contact" className="inline-flex items-center gap-2 bg-[#C8102E] hover:bg-[#A00D24] text-white px-8 py-4 rounded-md text-lg font-semibold transition-colors shadow-lg">
+          <Link href="/contact" className="btn btn-lg bg-white text-[#C8102E] hover:bg-gray-100">
             Contact Us Today <ArrowRight className="w-5 h-5" />
           </Link>
         </div>
