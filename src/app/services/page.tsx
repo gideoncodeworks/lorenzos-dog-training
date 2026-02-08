@@ -68,43 +68,51 @@ const services = [
 export default function ServicesPage() {
   return (
     <>
-      <section className="relative bg-[#1a1a2e] pt-36 pb-20">
-        <div className="absolute inset-0 opacity-20">
+      <section className="relative bg-[#121A15] pt-36 pb-20">
+        <div className="absolute inset-0 opacity-25">
           <Image src="https://images.squarespace-cdn.com/content/v1/5cb9fbd5c2ff6135a509b1a3/1558963623690-8674XMXBFTTAKZ0AFPS9/A+B74A0244.jpg" alt="" fill className="object-cover" />
         </div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="absolute inset-0 bg-gradient-to-br from-[#0F1713]/95 via-[#1B2A23]/82 to-[#1B2A23]/55" />
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage:
+              "radial-gradient(circle at 16% 18%, rgba(230, 184, 102, 0.2), transparent 42%), radial-gradient(circle at 78% 14%, rgba(199, 107, 69, 0.2), transparent 45%)",
+          }}
+        />
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
-            <p className="text-[#DAA520] font-semibold text-sm uppercase tracking-wider mb-3">What We Offer</p>
+            <p className="text-[#E6B866] font-semibold text-sm uppercase tracking-wider mb-3">What We Offer</p>
             <h1 className="text-4xl sm:text-5xl font-bold text-white mb-6">Our Training Services</h1>
             <p className="text-xl text-gray-300 leading-relaxed">Comprehensive training programs tailored to every dog and owner. From basic obedience to advanced specialty work, our expert trainers deliver serious results.</p>
           </div>
         </div>
       </section>
 
-      <section className="py-24 bg-white">
+      <section className="py-24 bg-[linear-gradient(180deg,#fbf8f3_0%,#f4eee6_100%)]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-24">
           {services.map((service, index) => (
             <div key={service.id} id={service.id} className="grid lg:grid-cols-2 gap-12 items-center">
               <div className={index % 2 === 1 ? "lg:order-2" : ""}>
-                <h2 className="text-2xl sm:text-3xl font-bold text-[#1a1a2e] mb-4">{service.title}</h2>
+                <h2 className="text-2xl sm:text-3xl font-bold text-[#1B2A23] mb-4">{service.title}</h2>
                 <p className="text-lg text-gray-600 mb-6 leading-relaxed">{service.description}</p>
                 <ul className="space-y-3 mb-6">
                   {service.details.map((d) => (
                     <li key={d} className="flex items-start gap-3">
-                      <CheckCircle className="w-5 h-5 text-[#B8860B] flex-shrink-0 mt-0.5" />
+                      <CheckCircle className="w-5 h-5 text-[#C76B45] flex-shrink-0 mt-0.5" />
                       <span className="text-gray-600 text-sm">{d}</span>
                     </li>
                   ))}
                 </ul>
-                <div className="bg-gray-50 rounded-xl p-5 border border-gray-100 mb-6">
-                  <p className="text-sm font-semibold text-[#1a1a2e] mb-1">Who Is This For?</p>
+                <div className="bg-white rounded-2xl p-5 border border-[#eadfce] shadow-[0_16px_40px_-32px_rgba(27,42,35,0.5)] mb-6">
+                  <p className="text-sm font-semibold text-[#1B2A23] mb-1">Who Is This For?</p>
                   <p className="text-gray-600 text-sm">{service.ideal}</p>
                 </div>
-                <Link href="/contact" className="inline-flex items-center gap-2 bg-[#B8860B] hover:bg-[#DAA520] text-white px-6 py-3 rounded-full text-sm font-semibold transition-colors">
+                <Link href="/contact" className="inline-flex items-center gap-2 bg-[#C76B45] hover:bg-[#E6B866] text-white px-6 py-3 rounded-2xl text-sm font-semibold transition-colors shadow-[0_16px_36px_-26px_rgba(199,107,69,0.7)]">
                   Get Started <ArrowRight className="w-4 h-4" />
                 </Link>
               </div>
-              <div className={`relative aspect-[4/3] rounded-2xl overflow-hidden shadow-xl ${index % 2 === 1 ? "lg:order-1" : ""}`}>
+              <div className={`relative aspect-[4/3] rounded-[28px] overflow-hidden shadow-2xl ring-1 ring-white/60 ${index % 2 === 1 ? "lg:order-1" : ""}`}>
                 <Image src={service.image} alt={service.title} fill className="object-cover" />
               </div>
             </div>
@@ -115,14 +123,21 @@ export default function ServicesPage() {
       <section className="relative py-20">
         <div className="absolute inset-0">
           <Image src="https://images.squarespace-cdn.com/content/v1/5cb9fbd5c2ff6135a509b1a3/969046be-c3f0-4eb5-96c8-42d43c0c6986/vet+recon.png" alt="" fill className="object-cover" />
-          <div className="absolute inset-0 bg-[#1a1a2e]/90" />
+          <div className="absolute inset-0 bg-[#121A15]/90" />
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage:
+                "radial-gradient(circle at 20% 20%, rgba(230, 184, 102, 0.2), transparent 45%), radial-gradient(circle at 80% 80%, rgba(199, 107, 69, 0.2), transparent 45%)",
+            }}
+          />
         </div>
         <div className="relative max-w-4xl mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold text-white mb-6">Not Sure Which Program Is Right?</h2>
           <p className="text-gray-300 mb-8 text-lg">Contact us for a free consultation. We&apos;ll assess your dog&apos;s needs and recommend the perfect program.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/contact" className="inline-flex items-center gap-2 bg-[#B8860B] hover:bg-[#DAA520] text-white px-8 py-4 rounded-full font-semibold transition-colors">Schedule a Consultation <ArrowRight className="w-5 h-5" /></Link>
-            <a href="tel:8664364959" className="inline-flex items-center gap-2 bg-white/10 backdrop-blur border border-white/20 hover:bg-white/20 text-white px-8 py-4 rounded-full font-semibold transition-colors"><Phone className="w-5 h-5" /> (866) 436-4959</a>
+            <Link href="/contact" className="inline-flex items-center gap-2 bg-[#C76B45] hover:bg-[#E6B866] text-white px-8 py-4 rounded-2xl font-semibold transition-colors shadow-[0_18px_40px_-24px_rgba(199,107,69,0.8)]">Schedule a Consultation <ArrowRight className="w-5 h-5" /></Link>
+            <a href="tel:8664364959" className="inline-flex items-center gap-2 bg-white/10 backdrop-blur border border-white/25 hover:bg-white/20 text-white px-8 py-4 rounded-2xl font-semibold transition-colors"><Phone className="w-5 h-5" /> (866) 436-4959</a>
           </div>
         </div>
       </section>

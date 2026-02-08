@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Archivo, Fraunces, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -7,8 +7,13 @@ import ChatBot from "@/components/ChatBot";
 import { Providers } from "@/components/Providers";
 import { getSiteData, fallbackSiteData } from "@/lib/cms";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const archivo = Archivo({
+  variable: "--font-archivo",
+  subsets: ["latin"],
+});
+
+const fraunces = Fraunces({
+  variable: "--font-fraunces",
   subsets: ["latin"],
 });
 
@@ -127,11 +132,11 @@ export default async function RootLayout({
         />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${archivo.variable} ${fraunces.variable} ${geistMono.variable} antialiased`}
         style={{
-          '--primary-color': data.brand.primaryColor || '#B8860B',
-          '--secondary-color': data.brand.secondaryColor || '#1a1a2e',
-          '--accent-color': data.brand.accentColor || '#DAA520',
+          '--primary-color': data.brand.primaryColor || '#C76B45',
+          '--secondary-color': data.brand.secondaryColor || '#1B2A23',
+          '--accent-color': data.brand.accentColor || '#E6B866',
         } as React.CSSProperties}
       >
         <Providers siteData={data}>

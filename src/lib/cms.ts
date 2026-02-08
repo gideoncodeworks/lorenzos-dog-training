@@ -121,9 +121,9 @@ export const fallbackSiteData: CMSSiteData = {
     name: "Lorenzo's Dog Training Team",
     domain: 'lorenzosdogtrainingteam.com',
     logo: null,
-    primaryColor: '#B8860B',
-    secondaryColor: '#1a1a2e',
-    accentColor: '#DAA520',
+    primaryColor: '#C76B45',
+    secondaryColor: '#1B2A23',
+    accentColor: '#E6B866',
     fontFamily: null,
   },
   contact: {

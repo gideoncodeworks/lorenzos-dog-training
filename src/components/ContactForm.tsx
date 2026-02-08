@@ -34,9 +34,9 @@ export default function ContactForm() {
 
   if (status === "success") {
     return (
-      <div className="bg-green-50 border border-green-200 rounded-2xl p-8 text-center">
+      <div className="bg-green-50 border border-green-200 rounded-[24px] p-8 text-center shadow-[0_18px_45px_-35px_rgba(27,42,35,0.45)]">
         <CheckCircle className="w-12 h-12 text-green-500 mx-auto mb-4" />
-        <h3 className="text-xl font-bold text-[#1a1a2e] mb-2">Message Sent!</h3>
+        <h3 className="text-xl font-bold text-[#1B2A23] mb-2">Message Sent!</h3>
         <p className="text-gray-600">
           Thank you for reaching out. One of our team members will contact you shortly
           to discuss your dog&apos;s training needs.
@@ -49,22 +49,22 @@ export default function ContactForm() {
     <form onSubmit={handleSubmit} className="space-y-5">
       <div className="grid sm:grid-cols-2 gap-5">
         <div>
-          <label htmlFor="name" className="block text-sm font-medium text-[#1a1a2e] mb-2">Full Name *</label>
-          <input type="text" id="name" name="name" required className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#B8860B] focus:ring-2 focus:ring-[#B8860B]/20 outline-none transition-all text-[#1a1a2e]" placeholder="Your name" />
+          <label htmlFor="name" className="block text-sm font-medium text-[#1B2A23] mb-2">Full Name *</label>
+          <input type="text" id="name" name="name" required className="w-full px-4 py-3 rounded-2xl border border-[#eadfce] bg-white/80 focus:border-[#C76B45] focus:ring-2 focus:ring-[#C76B45]/20 outline-none transition-all text-[#1B2A23] shadow-[0_14px_35px_-30px_rgba(27,42,35,0.35)]" placeholder="Your name" />
         </div>
         <div>
-          <label htmlFor="email" className="block text-sm font-medium text-[#1a1a2e] mb-2">Email Address *</label>
-          <input type="email" id="email" name="email" required className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#B8860B] focus:ring-2 focus:ring-[#B8860B]/20 outline-none transition-all text-[#1a1a2e]" placeholder="your@email.com" />
+          <label htmlFor="email" className="block text-sm font-medium text-[#1B2A23] mb-2">Email Address *</label>
+          <input type="email" id="email" name="email" required className="w-full px-4 py-3 rounded-2xl border border-[#eadfce] bg-white/80 focus:border-[#C76B45] focus:ring-2 focus:ring-[#C76B45]/20 outline-none transition-all text-[#1B2A23] shadow-[0_14px_35px_-30px_rgba(27,42,35,0.35)]" placeholder="your@email.com" />
         </div>
       </div>
       <div className="grid sm:grid-cols-2 gap-5">
         <div>
-          <label htmlFor="phone" className="block text-sm font-medium text-[#1a1a2e] mb-2">Phone Number</label>
-          <input type="tel" id="phone" name="phone" className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#B8860B] focus:ring-2 focus:ring-[#B8860B]/20 outline-none transition-all text-[#1a1a2e]" placeholder="(555) 555-5555" />
+          <label htmlFor="phone" className="block text-sm font-medium text-[#1B2A23] mb-2">Phone Number</label>
+          <input type="tel" id="phone" name="phone" className="w-full px-4 py-3 rounded-2xl border border-[#eadfce] bg-white/80 focus:border-[#C76B45] focus:ring-2 focus:ring-[#C76B45]/20 outline-none transition-all text-[#1B2A23] shadow-[0_14px_35px_-30px_rgba(27,42,35,0.35)]" placeholder="(555) 555-5555" />
         </div>
         <div>
-          <label htmlFor="service" className="block text-sm font-medium text-[#1a1a2e] mb-2">Service Interested In</label>
-          <select id="service" name="service" className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#B8860B] focus:ring-2 focus:ring-[#B8860B]/20 outline-none transition-all text-[#1a1a2e] bg-white">
+          <label htmlFor="service" className="block text-sm font-medium text-[#1B2A23] mb-2">Service Interested In</label>
+          <select id="service" name="service" className="w-full px-4 py-3 rounded-2xl border border-[#eadfce] bg-white/80 focus:border-[#C76B45] focus:ring-2 focus:ring-[#C76B45]/20 outline-none transition-all text-[#1B2A23] shadow-[0_14px_35px_-30px_rgba(27,42,35,0.35)]">
             <option value="">Select a service</option>
             <option value="basic">Basic Obedience</option>
             <option value="behavioral">Behavioral Modification</option>
@@ -77,19 +77,19 @@ export default function ContactForm() {
         </div>
       </div>
       <div>
-        <label htmlFor="message" className="block text-sm font-medium text-[#1a1a2e] mb-2">Tell Us About Your Dog *</label>
-        <textarea id="message" name="message" required rows={5} className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#B8860B] focus:ring-2 focus:ring-[#B8860B]/20 outline-none transition-all text-[#1a1a2e] resize-none" placeholder="Tell us about your dog's breed, age, and any behavioral concerns..." />
+        <label htmlFor="message" className="block text-sm font-medium text-[#1B2A23] mb-2">Tell Us About Your Dog *</label>
+        <textarea id="message" name="message" required rows={5} className="w-full px-4 py-3 rounded-2xl border border-[#eadfce] bg-white/80 focus:border-[#C76B45] focus:ring-2 focus:ring-[#C76B45]/20 outline-none transition-all text-[#1B2A23] resize-none shadow-[0_14px_35px_-30px_rgba(27,42,35,0.35)]" placeholder="Tell us about your dog's breed, age, and any behavioral concerns..." />
       </div>
       {status === "error" && (
         <p className="text-red-500 text-sm text-center">{errorMsg}</p>
       )}
-      <button type="submit" disabled={status === "loading"} className="w-full flex items-center justify-center gap-2 bg-[#B8860B] hover:bg-[#DAA520] disabled:opacity-60 text-white px-8 py-4 rounded-xl font-semibold transition-colors duration-200 text-lg">
+      <button type="submit" disabled={status === "loading"} className="w-full flex items-center justify-center gap-2 bg-[#C76B45] hover:bg-[#E6B866] disabled:opacity-60 text-white px-8 py-4 rounded-2xl font-semibold transition-colors duration-200 text-lg shadow-[0_18px_40px_-24px_rgba(199,107,69,0.8)]">
         <Send className="w-5 h-5" />
         {status === "loading" ? "Sending..." : "Send Message"}
       </button>
       <p className="text-sm text-gray-500 text-center">
         We typically respond within 24 hours. For immediate assistance, call{" "}
-        <a href="tel:8664364959" className="text-[#B8860B] font-medium">(866) 436-4959</a>.
+        <a href="tel:8664364959" className="text-[#C76B45] font-medium">(866) 436-4959</a>.
       </p>
     </form>
   );

@@ -26,7 +26,7 @@ const businessKnowledge: Record<string, { keywords: string[]; response: string }
   },
   locations: {
     keywords: ["location", "where", "area", "state", "near me", "city", "address", "find"],
-    response: `We have professional trainers across **11 states**:\n\n**Headquarters:** 4805 Orchard Rd., Garfield Heights, OH 44128\n\n**States we serve:**\n- **Ohio** - Cleveland, Reynoldsburg\n- **California** - San Diego, Sacramento, San Jose, and more\n- **Florida** - Pensacola, Crestview, Milton, Navarre\n- **Texas** - Houston, San Antonio, Fort Worth\n- **Georgia** - Atlanta metro area\n- Plus: Indiana, Kansas, Kentucky, Massachusetts, Michigan, New Hampshire\n\nOur trainers come to you for in-home training! What area are you in?`,
+    response: `We have professional trainers across **11 states**:\n\n**Headquarters:** 4805 Orchard Rd., Garfield Heights, OH 44128\n\n**States we serve:**\n- **Ohio** - Cleveland, Reynoldsburg\n- **California** - San Diego, San Jose, and more\n- **Florida** - Pensacola, Crestview, Milton, Navarre\n- **Texas** - Houston, San Antonio, Fort Worth\n- **Georgia** - Atlanta metro area\n- Plus: Indiana, Kansas, Kentucky, Massachusetts, Michigan, New Hampshire\n\nOur trainers come to you for in-home training! What area are you in?`,
   },
   contact: {
     keywords: ["contact", "phone", "call", "email", "reach", "talk", "speak", "appointment", "consult"],
@@ -172,14 +172,14 @@ export default function ChatBot() {
     return null;
   }
 
-  const primaryColor = siteData.brand.primaryColor || "#B8860B";
-  const secondaryColor = siteData.brand.secondaryColor || "#1a1a2e";
+  const primaryColor = siteData.brand.primaryColor || "#C76B45";
+  const secondaryColor = siteData.brand.secondaryColor || "#1B2A23";
 
   return (
     <>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={`fixed bottom-6 right-6 z-50 w-16 h-16 rounded-full shadow-2xl flex items-center justify-center transition-all duration-300 ${
+        className={`fixed bottom-6 right-6 z-50 w-16 h-16 rounded-full shadow-[0_24px_60px_-30px_rgba(18,26,21,0.8)] flex items-center justify-center transition-all duration-300 ${
           isOpen ? "rotate-0" : "hover:scale-110"
         }`}
         style={{ backgroundColor: isOpen ? secondaryColor : primaryColor }}
@@ -195,26 +195,31 @@ export default function ChatBot() {
       )}
 
       {isOpen && (
-        <div className="fixed bottom-24 right-6 z-50 w-[380px] max-w-[calc(100vw-2rem)] bg-white rounded-2xl shadow-2xl border border-gray-200 flex flex-col overflow-hidden" style={{ height: "500px" }}>
-          <div className="px-5 py-4 flex items-center gap-3" style={{ backgroundColor: secondaryColor }}>
-            <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ backgroundColor: primaryColor }}>
+        <div className="fixed bottom-24 right-6 z-50 w-[380px] max-w-[calc(100vw-2rem)] bg-[#FBF8F3] rounded-[26px] shadow-[0_28px_70px_-35px_rgba(18,26,21,0.75)] border border-[#eadfce] flex flex-col overflow-hidden" style={{ height: "500px" }}>
+          <div
+            className="px-5 py-4 flex items-center gap-3"
+            style={{
+              backgroundImage: `linear-gradient(135deg, ${secondaryColor} 0%, #1f2f26 100%)`,
+            }}
+          >
+            <div className="w-10 h-10 rounded-2xl flex items-center justify-center" style={{ backgroundColor: primaryColor }}>
               <Bot className="w-5 h-5 text-white" />
             </div>
             <div>
               <h3 className="text-white font-semibold text-sm">{siteData.brand.name}</h3>
-              <p className="text-green-400 text-xs flex items-center gap-1">
-                <span className="w-2 h-2 bg-green-400 rounded-full inline-block" />
+              <p className="text-[#E6B866] text-xs flex items-center gap-1">
+                <span className="w-2 h-2 bg-[#E6B866] rounded-full inline-block" />
                 Usually replies instantly
               </p>
             </div>
           </div>
 
-          <div className="flex-1 overflow-y-auto px-4 py-4 space-y-4 bg-gray-50">
+          <div className="flex-1 overflow-y-auto px-4 py-4 space-y-4 bg-[#F7F1E8]">
             {messages.map((msg) => (
               <div key={msg.id} className={`flex gap-2 ${msg.role === "user" ? "flex-row-reverse" : ""}`}>
                 <div
-                  className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0"
-                  style={{ backgroundColor: msg.role === "assistant" ? `${primaryColor}15` : secondaryColor }}
+                  className="w-8 h-8 rounded-2xl flex items-center justify-center flex-shrink-0"
+                  style={{ backgroundColor: msg.role === "assistant" ? "#f4e6db" : secondaryColor }}
                 >
                   {msg.role === "assistant" ? (
                     <Bot className="w-4 h-4" style={{ color: primaryColor }} />
@@ -223,8 +228,8 @@ export default function ChatBot() {
                   )}
                 </div>
                 <div
-                  className={`max-w-[75%] rounded-2xl px-4 py-3 text-sm leading-relaxed ${
-                    msg.role === "assistant" ? "bg-white border border-gray-200 text-gray-700" : "text-white"
+                  className={`max-w-[75%] rounded-[22px] px-4 py-3 text-sm leading-relaxed ${
+                    msg.role === "assistant" ? "bg-white border border-[#eadfce] text-[#3b3b3b]" : "text-white"
                   }`}
                   style={msg.role === "user" ? { backgroundColor: primaryColor } : undefined}
                   dangerouslySetInnerHTML={{
@@ -237,10 +242,10 @@ export default function ChatBot() {
             ))}
             {isLoading && (
               <div className="flex gap-2">
-                <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{ backgroundColor: `${primaryColor}15` }}>
+                <div className="w-8 h-8 rounded-2xl flex items-center justify-center" style={{ backgroundColor: "#f4e6db" }}>
                   <Bot className="w-4 h-4" style={{ color: primaryColor }} />
                 </div>
-                <div className="bg-white border border-gray-200 rounded-2xl px-4 py-3 text-sm text-gray-400">
+                <div className="bg-white border border-[#eadfce] rounded-[22px] px-4 py-3 text-sm text-gray-400">
                   Typing...
                 </div>
               </div>
@@ -248,7 +253,7 @@ export default function ChatBot() {
             <div ref={messagesEndRef} />
           </div>
 
-          <div className="p-3 border-t border-gray-200 bg-white">
+          <div className="p-3 border-t border-[#eadfce] bg-[#FBF8F3]">
             <div className="flex gap-2">
               <input
                 type="text"
@@ -256,13 +261,13 @@ export default function ChatBot() {
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && sendMessage()}
                 placeholder="Type a message..."
-                className="flex-1 px-4 py-2.5 rounded-xl border border-gray-200 outline-none text-sm text-[#1a1a2e]"
+                className="flex-1 px-4 py-2.5 rounded-2xl border border-[#eadfce] bg-white/80 outline-none text-sm text-[#1B2A23] shadow-[0_12px_30px_-25px_rgba(27,42,35,0.4)]"
                 style={{ borderColor: input ? primaryColor : undefined }}
               />
               <button
                 onClick={sendMessage}
                 disabled={isLoading || !input.trim()}
-                className="w-10 h-10 rounded-xl flex items-center justify-center transition-colors disabled:opacity-50"
+                className="w-10 h-10 rounded-2xl flex items-center justify-center transition-colors disabled:opacity-50 shadow-[0_10px_26px_-18px_rgba(199,107,69,0.7)]"
                 style={{ backgroundColor: primaryColor }}
                 aria-label="Send message"
               >
