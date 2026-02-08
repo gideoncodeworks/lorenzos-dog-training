@@ -104,3 +104,22 @@ textarea:focus-visible {
     transform: none;
   }
 }
+
+/* Safe area for mobile devices */
+.safe-top {
+  padding-top: env(safe-area-inset-top, 0);
+}
+
+.safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom, 0);
+}
+
+/* Prevent iOS zoom on input focus */
+@media (max-width: 640px) {
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  textarea {
+    font-size: 16px !important;
+  }
+}

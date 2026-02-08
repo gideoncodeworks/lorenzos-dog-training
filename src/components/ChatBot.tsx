@@ -1,8 +1,10 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { MessageCircle, X, Send, Bot, User } from "lucide-react";
 import { useSiteData } from "@/lib/site-context";
+import Link from "next/link";
 
 interface Message {
   id: string;
@@ -71,13 +73,23 @@ function getLocalResponse(input: string): string {
 }
 
 export default function ChatBot() {
+  const pathname = usePathname();
   const siteData = useSiteData();
   const [isOpen, setIsOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [sessionId, setSessionId] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  // Detect mobile
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 640);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   // Initialize session
   useEffect(() => {
@@ -168,6 +180,11 @@ export default function ChatBot() {
     }
   };
 
+  // Don't show on chat page
+  if (pathname === "/chat") {
+    return null;
+  }
+
   if (process.env.NEXT_PUBLIC_CHATBOT_ENABLED === "false") {
     return null;
   }
@@ -175,6 +192,24 @@ export default function ChatBot() {
   const primaryColor = siteData.brand.primaryColor || "#C8102E";
   const secondaryColor = siteData.brand.secondaryColor || "#091353";
 
+  // Mobile: Link to full-page chat
+  if (isMobile) {
+    return (
+      <div className="fixed bottom-6 right-6 z-50">
+        <Link
+          href="/chat"
+          className="w-16 h-16 rounded-full shadow-lg flex items-center justify-center transition-all hover:scale-110"
+          style={{ backgroundColor: primaryColor }}
+          aria-label="Chat with us"
+        >
+          <MessageCircle className="w-7 h-7 text-white" />
+        </Link>
+        <div className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full animate-pulse" />
+      </div>
+    );
+  }
+
+  // Desktop: Full chat widget
   return (
     <>
       <button
