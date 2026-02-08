@@ -25,14 +25,7 @@ export default function FloridaPage() {
   return (
     <>
       <section className="relative bg-[#060D3A] pt-36 pb-20">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#060D3A]/95 via-[#091353]/82 to-[#091353]/55" />
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage:
-              "radial-gradient(circle at 16% 18%, rgba(230, 184, 102, 0.18), transparent 42%), radial-gradient(circle at 78% 14%, rgba(199, 107, 69, 0.18), transparent 45%)",
-          }}
-        />
+        <div className="absolute inset-0 bg-[#091353]/90" />
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
             <div className="flex items-center gap-2 text-[#C8102E] mb-4">
@@ -48,9 +41,9 @@ export default function FloridaPage() {
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-[#091353] mb-12">Meet Our Florida <span className="text-[#C8102E]">Trainers</span></h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 stagger">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {trainers.map((t) => (
-              <div key={t.name} className="bg-white rounded-lg overflow-hidden border border-[#e5e7eb] shadow-[0_20px_50px_-35px_rgba(27,42,35,0.45)] hover:shadow-[0_28px_70px_-35px_rgba(27,42,35,0.55)] transition-all duration-300">
+              <div key={t.name} className="bg-white rounded-lg overflow-hidden border border-[#e5e7eb] shadow-md hover:shadow-lg transition-all duration-300">
                 <div className="relative aspect-square">
                   <Image src={t.image} alt={t.name} fill className="object-cover object-top" />
                 </div>
@@ -68,19 +61,12 @@ export default function FloridaPage() {
       </section>
 
       <section className="relative py-20 bg-[#060D3A]">
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage:
-              "radial-gradient(circle at 20% 20%, rgba(230, 184, 102, 0.16), transparent 45%), radial-gradient(circle at 80% 80%, rgba(199, 107, 69, 0.16), transparent 45%)",
-          }}
-        />
         <div className="relative z-10 max-w-4xl mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold text-white mb-6">Ready to Get Started in Florida?</h2>
           <p className="text-gray-300 mb-8">Contact us to connect with a Florida-based trainer near you.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/contact" className="inline-flex items-center gap-2 bg-[#C8102E] hover:bg-[#C8102E] text-white px-8 py-4 rounded-2xl font-semibold transition-colors shadow-[0_18px_40px_-24px_rgba(199,107,69,0.8)]">Contact Us <ArrowRight className="w-5 h-5" /></Link>
-            <a href="tel:8664364959" className="inline-flex items-center gap-2 bg-white/10 backdrop-blur border border-white/25 hover:bg-white/20 text-white px-8 py-4 rounded-2xl font-semibold transition-colors"><Phone className="w-5 h-5" /> (866) 436-4959</a>
+            <Link href="/contact" className="inline-flex items-center gap-2 bg-[#C8102E] hover:bg-[#A00D24] text-white px-8 py-4 rounded-md font-semibold transition-colors shadow-lg">Contact Us <ArrowRight className="w-5 h-5" /></Link>
+            <a href="tel:8664364959" className="inline-flex items-center gap-2 bg-white/10 backdrop-blur border border-white/25 hover:bg-white/20 text-white px-8 py-4 rounded-md font-semibold transition-colors"><Phone className="w-5 h-5" /> (866) 436-4959</a>
           </div>
         </div>
       </section>
