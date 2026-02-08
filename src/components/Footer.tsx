@@ -2,56 +2,39 @@ import Link from "next/link";
 import Image from "next/image";
 import { Phone, MapPin, Mail } from "lucide-react";
 
-const quickLinks = [
+const links = [
   { name: "Home", href: "/" },
   { name: "About Us", href: "/about" },
   { name: "Services", href: "/services" },
   { name: "Facilities", href: "/facilities" },
+  { name: "Locations", href: "/locations/ohio" },
   { name: "Contact", href: "/contact" },
-];
-
-const serviceLinks = [
-  { name: "Basic Obedience", href: "/services#basic-obedience" },
-  { name: "Behavioral Modification", href: "/services#behavioral-modification" },
-  { name: "Service Dog Training", href: "/services#service-dog" },
-  { name: "Specialty Training", href: "/services#specialty" },
-  { name: "Protection Training", href: "/services#protection" },
-];
-
-const locationLinks = [
-  { name: "Ohio", href: "/locations/ohio" },
-  { name: "California", href: "/locations/california" },
-  { name: "Florida", href: "/locations/florida" },
-  { name: "Texas", href: "/locations/texas" },
-  { name: "Georgia", href: "/locations/georgia" },
 ];
 
 export default function Footer() {
   return (
     <footer className="bg-[#091353]">
-      <div className="max-w-[1200px] mx-auto px-6 lg:px-8 py-20 lg:py-24">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16">
+      <div className="container-site section-padding">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-16">
           {/* Brand */}
           <div>
-            <div className="mb-8">
-              <Image
-                src="https://images.squarespace-cdn.com/content/v1/5cb9fbd5c2ff6135a509b1a3/1555948162251-E76BZTAQEW2CRKQL0RPH/Lorenzo_Logo+white+letters_small.png"
-                alt="Lorenzo's Dog Training Team"
-                width={200}
-                height={70}
-                className="h-16 w-auto object-contain"
-              />
-            </div>
-            <p className="text-blue-200/60 leading-relaxed mb-8">
+            <Image
+              src="https://images.squarespace-cdn.com/content/v1/5cb9fbd5c2ff6135a509b1a3/1555948162251-E76BZTAQEW2CRKQL0RPH/Lorenzo_Logo+white+letters_small.png"
+              alt="Lorenzo's Dog Training Team"
+              width={180}
+              height={60}
+              className="h-14 w-auto object-contain mb-6"
+            />
+            <p className="text-blue-200/60 leading-relaxed mb-8 max-w-xs">
               Over 40 years of keeping dogs out of shelters and in happy homes.
               Serious Training, Serious Results.
             </p>
-            <div className="flex gap-4">
+            <div className="flex gap-3">
               <a
                 href="https://www.instagram.com/lorenzosdogtrainingteam/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-11 h-11 bg-white/10 rounded-lg flex items-center justify-center hover:bg-[#C8102E] transition-colors"
+                className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-[#C8102E] transition-colors"
                 aria-label="Instagram"
               >
                 <svg className="w-5 h-5 fill-current text-white" viewBox="0 0 24 24">
@@ -62,7 +45,7 @@ export default function Footer() {
                 href="https://www.facebook.com/LorenzosDogTrainingTeam/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-11 h-11 bg-white/10 rounded-lg flex items-center justify-center hover:bg-[#C8102E] transition-colors"
+                className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-[#C8102E] transition-colors"
                 aria-label="Facebook"
               >
                 <svg className="w-5 h-5 fill-current text-white" viewBox="0 0 24 24">
@@ -73,7 +56,7 @@ export default function Footer() {
                 href="https://www.youtube.com/user/mydogtrainingteam"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-11 h-11 bg-white/10 rounded-lg flex items-center justify-center hover:bg-[#C8102E] transition-colors"
+                className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-[#C8102E] transition-colors"
                 aria-label="YouTube"
               >
                 <svg className="w-5 h-5 fill-current text-white" viewBox="0 0 24 24">
@@ -86,25 +69,8 @@ export default function Footer() {
           {/* Quick Links */}
           <div>
             <h3 className="text-white font-bold text-lg mb-6">Quick Links</h3>
-            <ul className="space-y-4">
-              {quickLinks.map((link) => (
-                <li key={link.name}>
-                  <Link
-                    href={link.href}
-                    className="text-blue-200/60 hover:text-white transition-colors"
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Services */}
-          <div>
-            <h3 className="text-white font-bold text-lg mb-6">Our Services</h3>
-            <ul className="space-y-4">
-              {serviceLinks.map((link) => (
+            <ul className="space-y-3">
+              {links.map((link) => (
                 <li key={link.name}>
                   <Link
                     href={link.href}
@@ -120,16 +86,15 @@ export default function Footer() {
           {/* Contact */}
           <div>
             <h3 className="text-white font-bold text-lg mb-6">Contact Us</h3>
-            <ul className="space-y-5">
-              <li className="flex items-start gap-4">
-                <MapPin className="w-5 h-5 text-[#C8102E] flex-shrink-0 mt-1" />
+            <ul className="space-y-4">
+              <li className="flex items-start gap-3">
+                <MapPin className="w-5 h-5 text-[#C8102E] flex-shrink-0 mt-0.5" />
                 <span className="text-blue-200/60">
-                  4805 Orchard Rd.
-                  <br />
+                  4805 Orchard Rd.<br />
                   Garfield Heights, OH 44128
                 </span>
               </li>
-              <li className="flex items-center gap-4">
+              <li className="flex items-center gap-3">
                 <Phone className="w-5 h-5 text-[#C8102E] flex-shrink-0" />
                 <a
                   href="tel:8664364959"
@@ -138,7 +103,7 @@ export default function Footer() {
                   (866) 436-4959
                 </a>
               </li>
-              <li className="flex items-center gap-4">
+              <li className="flex items-center gap-3">
                 <Mail className="w-5 h-5 text-[#C8102E] flex-shrink-0" />
                 <a
                   href="mailto:info@lorenzosdogtrainingteam.com"
@@ -148,29 +113,13 @@ export default function Footer() {
                 </a>
               </li>
             </ul>
-
-            <div className="mt-8">
-              <h4 className="text-white text-sm font-semibold mb-4">Locations</h4>
-              <div className="flex flex-wrap gap-2">
-                {locationLinks.map((loc) => (
-                  <Link
-                    key={loc.name}
-                    href={loc.href}
-                    className="text-sm bg-white/5 hover:bg-white/10 text-blue-200/60 hover:text-white px-4 py-2 rounded-lg transition-colors"
-                  >
-                    {loc.name}
-                  </Link>
-                ))}
-              </div>
-            </div>
           </div>
         </div>
 
         {/* Bottom */}
-        <div className="border-t border-white/10 mt-16 pt-10 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-blue-200/40">
-            &copy; {new Date().getFullYear()} Lorenzo&apos;s Dog Training Team.
-            All rights reserved.
+        <div className="border-t border-white/10 mt-12 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-blue-200/40 text-sm">
+            &copy; {new Date().getFullYear()} Lorenzo&apos;s Dog Training Team. All rights reserved.
           </p>
           <p className="text-blue-200/30 text-sm">
             Serving 11 states nationwide since 1987
