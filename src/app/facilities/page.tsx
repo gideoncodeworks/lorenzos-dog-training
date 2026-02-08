@@ -31,7 +31,7 @@ const facilityImages = [
 export default function FacilitiesPage() {
   return (
     <>
-      <section className="relative bg-[#121A15] pt-36 pb-20">
+      <section className="relative bg-[#060D3A] pt-36 pb-20">
         <div className="absolute inset-0 opacity-30">
           <Image
             src="https://images.squarespace-cdn.com/content/v1/5cb9fbd5c2ff6135a509b1a3/1558963623690-8674XMXBFTTAKZ0AFPS9/A+B74A0244.jpg"
@@ -40,7 +40,7 @@ export default function FacilitiesPage() {
             className="object-cover"
           />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-br from-[#0F1713]/95 via-[#1B2A23]/82 to-[#1B2A23]/55" />
+        <div className="absolute inset-0 bg-gradient-to-br from-[#060D3A]/95 via-[#091353]/82 to-[#091353]/55" />
         <div
           className="absolute inset-0"
           style={{
@@ -50,7 +50,7 @@ export default function FacilitiesPage() {
         />
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
-            <p className="text-[#E6B866] font-semibold text-sm uppercase tracking-wider mb-3">Our Headquarters</p>
+            <p className="text-[#C8102E] font-semibold text-sm uppercase tracking-wider mb-3">Our Headquarters</p>
             <h1 className="text-4xl sm:text-5xl font-bold text-white mb-6">
               Our Facility
             </h1>
@@ -62,12 +62,12 @@ export default function FacilitiesPage() {
         </div>
       </section>
 
-      <section className="py-24 bg-[linear-gradient(180deg,#fbf8f3_0%,#f4eee6_100%)]">
+      <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-start">
             <div>
-              <h2 className="text-3xl font-bold text-[#1B2A23] mb-8">
-                Cleveland Training <span className="text-[#C76B45]">Headquarters</span>
+              <h2 className="text-3xl font-bold text-[#091353] mb-8">
+                Cleveland Training <span className="text-[#C8102E]">Headquarters</span>
               </h2>
               <p className="text-gray-600 leading-relaxed mb-6">
                 Our trainers gain hands-on experience in our Cleveland, Ohio based, 3,700 sq. ft.
@@ -88,29 +88,29 @@ export default function FacilitiesPage() {
                 challenges.
               </p>
               <div className="flex items-center gap-3 text-gray-500 mb-8">
-                <MapPin className="w-5 h-5 text-[#C76B45]" />
+                <MapPin className="w-5 h-5 text-[#C8102E]" />
                 <span>4805 Orchard Rd., Garfield Heights, OH 44128</span>
               </div>
               <div className="grid grid-cols-2 gap-4">
-                <div className="bg-[#1B2A23] rounded-2xl p-5 text-center shadow-[0_20px_50px_-35px_rgba(18,26,21,0.8)]">
-                  <div className="text-2xl font-bold text-[#E6B866]">3,700</div>
+                <div className="bg-[#091353] rounded-2xl p-5 text-center shadow-[0_20px_50px_-35px_rgba(18,26,21,0.8)]">
+                  <div className="text-2xl font-bold text-[#C8102E]">3,700</div>
                   <div className="text-sm text-gray-400">Square Feet</div>
                 </div>
-                <div className="bg-[#1B2A23] rounded-2xl p-5 text-center shadow-[0_20px_50px_-35px_rgba(18,26,21,0.8)]">
-                  <div className="text-2xl font-bold text-[#E6B866]">Full</div>
+                <div className="bg-[#091353] rounded-2xl p-5 text-center shadow-[0_20px_50px_-35px_rgba(18,26,21,0.8)]">
+                  <div className="text-2xl font-bold text-[#C8102E]">Full</div>
                   <div className="text-sm text-gray-400">Obstacle Course</div>
                 </div>
-                <div className="bg-[#1B2A23] rounded-2xl p-5 text-center shadow-[0_20px_50px_-35px_rgba(18,26,21,0.8)]">
-                  <div className="text-2xl font-bold text-[#E6B866]">In/Out</div>
+                <div className="bg-[#091353] rounded-2xl p-5 text-center shadow-[0_20px_50px_-35px_rgba(18,26,21,0.8)]">
+                  <div className="text-2xl font-bold text-[#C8102E]">In/Out</div>
                   <div className="text-sm text-gray-400">Boarding Areas</div>
                 </div>
-                <div className="bg-[#1B2A23] rounded-2xl p-5 text-center shadow-[0_20px_50px_-35px_rgba(18,26,21,0.8)]">
-                  <div className="text-2xl font-bold text-[#E6B866]">Trainer</div>
+                <div className="bg-[#091353] rounded-2xl p-5 text-center shadow-[0_20px_50px_-35px_rgba(18,26,21,0.8)]">
+                  <div className="text-2xl font-bold text-[#C8102E]">Trainer</div>
                   <div className="text-sm text-gray-400">Academy</div>
                 </div>
               </div>
             </div>
-            <div className="relative aspect-[3/4] rounded-[28px] overflow-hidden shadow-2xl ring-1 ring-white/60">
+            <div className="relative aspect-[3/4] rounded-lg overflow-hidden shadow-2xl ring-1 ring-white/60">
               <Image
                 src="https://images.squarespace-cdn.com/content/v1/5cb9fbd5c2ff6135a509b1a3/1558963623690-8674XMXBFTTAKZ0AFPS9/A+B74A0244.jpg"
                 alt="Lorenzo's Dog Training Team facility"
@@ -123,11 +123,11 @@ export default function FacilitiesPage() {
       </section>
 
       {/* Photo Gallery */}
-      <section className="py-24 bg-[linear-gradient(180deg,#f6f1e8_0%,#f1e9df_100%)]">
+      <section className="py-24 bg-[#F5F7FA]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <p className="text-[#C76B45] font-semibold text-sm uppercase tracking-wider mb-3">Gallery</p>
-            <h2 className="text-3xl font-bold text-[#1B2A23]">Inside Our Facility</h2>
+            <p className="text-[#C8102E] font-semibold text-sm uppercase tracking-wider mb-3">Gallery</p>
+            <h2 className="text-3xl font-bold text-[#091353]">Inside Our Facility</h2>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 stagger">
             {facilityImages.map((img, i) => (
@@ -149,7 +149,7 @@ export default function FacilitiesPage() {
         </div>
       </section>
 
-      <section className="relative py-20 bg-[#121A15]">
+      <section className="relative py-20 bg-[#060D3A]">
         <div
           className="absolute inset-0"
           style={{
@@ -160,7 +160,7 @@ export default function FacilitiesPage() {
         <div className="relative z-10 max-w-4xl mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold text-white mb-6">Want to See Our Facility in Action?</h2>
           <p className="text-gray-300 mb-8 text-lg">Schedule a visit to our Cleveland headquarters and see firsthand how we train both dogs and professional trainers.</p>
-          <Link href="/contact" className="inline-flex items-center gap-2 bg-[#C76B45] hover:bg-[#E6B866] text-white px-8 py-4 rounded-2xl font-semibold transition-colors shadow-[0_18px_40px_-24px_rgba(199,107,69,0.8)]">
+          <Link href="/contact" className="inline-flex items-center gap-2 bg-[#C8102E] hover:bg-[#C8102E] text-white px-8 py-4 rounded-2xl font-semibold transition-colors shadow-[0_18px_40px_-24px_rgba(199,107,69,0.8)]">
             Contact Us <ArrowRight className="w-5 h-5" />
           </Link>
         </div>

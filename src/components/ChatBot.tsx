@@ -172,8 +172,8 @@ export default function ChatBot() {
     return null;
   }
 
-  const primaryColor = siteData.brand.primaryColor || "#C76B45";
-  const secondaryColor = siteData.brand.secondaryColor || "#1B2A23";
+  const primaryColor = siteData.brand.primaryColor || "#C8102E";
+  const secondaryColor = siteData.brand.secondaryColor || "#091353";
 
   return (
     <>
@@ -195,11 +195,11 @@ export default function ChatBot() {
       )}
 
       {isOpen && (
-        <div className="fixed bottom-24 right-6 z-50 w-[380px] max-w-[calc(100vw-2rem)] bg-[#FBF8F3] rounded-[26px] shadow-[0_28px_70px_-35px_rgba(18,26,21,0.75)] border border-[#eadfce] flex flex-col overflow-hidden" style={{ height: "500px" }}>
+        <div className="fixed bottom-24 right-6 z-50 w-[380px] max-w-[calc(100vw-2rem)] bg-[#F9FAFB] rounded-lg shadow-[0_28px_70px_-35px_rgba(18,26,21,0.75)] border border-[#e5e7eb] flex flex-col overflow-hidden" style={{ height: "500px" }}>
           <div
             className="px-5 py-4 flex items-center gap-3"
             style={{
-              backgroundImage: `linear-gradient(135deg, ${secondaryColor} 0%, #1f2f26 100%)`,
+              backgroundImage: `linear-gradient(135deg, ${secondaryColor} 0%, #0B1A5E 100%)`,
             }}
           >
             <div className="w-10 h-10 rounded-2xl flex items-center justify-center" style={{ backgroundColor: primaryColor }}>
@@ -207,19 +207,19 @@ export default function ChatBot() {
             </div>
             <div>
               <h3 className="text-white font-semibold text-sm">{siteData.brand.name}</h3>
-              <p className="text-[#E6B866] text-xs flex items-center gap-1">
-                <span className="w-2 h-2 bg-[#E6B866] rounded-full inline-block" />
+              <p className="text-[#C8102E] text-xs flex items-center gap-1">
+                <span className="w-2 h-2 bg-[#C8102E] rounded-full inline-block" />
                 Usually replies instantly
               </p>
             </div>
           </div>
 
-          <div className="flex-1 overflow-y-auto px-4 py-4 space-y-4 bg-[#F7F1E8]">
+          <div className="flex-1 overflow-y-auto px-4 py-4 space-y-4 bg-[#F5F7FA]">
             {messages.map((msg) => (
               <div key={msg.id} className={`flex gap-2 ${msg.role === "user" ? "flex-row-reverse" : ""}`}>
                 <div
                   className="w-8 h-8 rounded-2xl flex items-center justify-center flex-shrink-0"
-                  style={{ backgroundColor: msg.role === "assistant" ? "#f4e6db" : secondaryColor }}
+                  style={{ backgroundColor: msg.role === "assistant" ? "#E5E7EB" : secondaryColor }}
                 >
                   {msg.role === "assistant" ? (
                     <Bot className="w-4 h-4" style={{ color: primaryColor }} />
@@ -229,7 +229,7 @@ export default function ChatBot() {
                 </div>
                 <div
                   className={`max-w-[75%] rounded-[22px] px-4 py-3 text-sm leading-relaxed ${
-                    msg.role === "assistant" ? "bg-white border border-[#eadfce] text-[#3b3b3b]" : "text-white"
+                    msg.role === "assistant" ? "bg-white border border-[#e5e7eb] text-[#3b3b3b]" : "text-white"
                   }`}
                   style={msg.role === "user" ? { backgroundColor: primaryColor } : undefined}
                   dangerouslySetInnerHTML={{
@@ -242,10 +242,10 @@ export default function ChatBot() {
             ))}
             {isLoading && (
               <div className="flex gap-2">
-                <div className="w-8 h-8 rounded-2xl flex items-center justify-center" style={{ backgroundColor: "#f4e6db" }}>
+                <div className="w-8 h-8 rounded-2xl flex items-center justify-center" style={{ backgroundColor: "#E5E7EB" }}>
                   <Bot className="w-4 h-4" style={{ color: primaryColor }} />
                 </div>
-                <div className="bg-white border border-[#eadfce] rounded-[22px] px-4 py-3 text-sm text-gray-400">
+                <div className="bg-white border border-[#e5e7eb] rounded-[22px] px-4 py-3 text-sm text-gray-400">
                   Typing...
                 </div>
               </div>
@@ -253,7 +253,7 @@ export default function ChatBot() {
             <div ref={messagesEndRef} />
           </div>
 
-          <div className="p-3 border-t border-[#eadfce] bg-[#FBF8F3]">
+          <div className="p-3 border-t border-[#e5e7eb] bg-[#F9FAFB]">
             <div className="flex gap-2">
               <input
                 type="text"
@@ -261,7 +261,7 @@ export default function ChatBot() {
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && sendMessage()}
                 placeholder="Type a message..."
-                className="flex-1 px-4 py-2.5 rounded-2xl border border-[#eadfce] bg-white/80 outline-none text-sm text-[#1B2A23] shadow-[0_12px_30px_-25px_rgba(27,42,35,0.4)]"
+                className="flex-1 px-4 py-2.5 rounded-2xl border border-[#e5e7eb] bg-white/80 outline-none text-sm text-[#091353] shadow-[0_12px_30px_-25px_rgba(27,42,35,0.4)]"
                 style={{ borderColor: input ? primaryColor : undefined }}
               />
               <button
