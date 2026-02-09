@@ -1,0 +1,1317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lorenzo's Dog Training - Website & SEO Analysis</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #091353;
+      color: #1a1a2e;
+      overflow: hidden;
+    }
+
+    .presentation {
+      width: 100vw;
+      height: 100vh;
+      position: relative;
+    }
+
+    .slide {
+      width: 100%;
+      height: 100%;
+      display: none;
+      padding: 40px 60px;
+      background: white;
+      position: absolute;
+      top: 0;
+      left: 0;
+      overflow: auto;
+      opacity: 0;
+      transform: translateX(100px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .slide.active {
+      display: flex;
+      flex-direction: column;
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .slide.dark {
+      background: linear-gradient(135deg, #091353 0%, #1a1a4e 100%);
+      color: white;
+    }
+
+    .slide.red {
+      background: linear-gradient(135deg, #C8102E 0%, #8B0000 100%);
+      color: white;
+    }
+
+    .slide.green {
+      background: linear-gradient(135deg, #059669 0%, #047857 100%);
+      color: white;
+    }
+
+    .slide-number {
+      position: fixed;
+      bottom: 30px;
+      right: 40px;
+      font-size: 14px;
+      color: #999;
+      z-index: 100;
+    }
+
+    .dark .slide-number, .red .slide-number, .green .slide-number { color: rgba(255,255,255,0.5); }
+
+    h1 {
+      font-size: 52px;
+      font-weight: 800;
+      margin-bottom: 20px;
+      line-height: 1.1;
+    }
+
+    h2 {
+      font-size: 36px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      color: #091353;
+    }
+
+    .dark h2, .red h2, .green h2 { color: white; }
+
+    h3 {
+      font-size: 22px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: #C8102E;
+    }
+
+    .dark h3 { color: #ff6b6b; }
+    .green h3 { color: #a7f3d0; }
+
+    p, li {
+      font-size: 18px;
+      line-height: 1.5;
+      color: #444;
+    }
+
+    .dark p, .dark li, .red p, .red li, .green p, .green li { color: rgba(255,255,255,0.9); }
+
+    ul { margin-left: 30px; margin-bottom: 20px; }
+    li { margin-bottom: 15px; }
+
+    .subtitle {
+      font-size: 28px;
+      color: #666;
+      margin-bottom: 40px;
+    }
+
+    .dark .subtitle { color: rgba(255,255,255,0.7); }
+
+    .tag {
+      display: inline-block;
+      background: #C8102E;
+      color: white;
+      padding: 8px 20px;
+      border-radius: 30px;
+      font-size: 14px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 20px;
+    }
+
+    .dark .tag { background: rgba(255,255,255,0.2); }
+    .green .tag { background: rgba(255,255,255,0.2); }
+
+    .flex-center {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      height: 100%;
+      text-align: center;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+      margin-top: 30px;
+    }
+
+    .what-box {
+      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+      border-left: 5px solid #0ea5e9;
+      padding: 20px;
+      border-radius: 0 16px 16px 0;
+      margin: 15px 0;
+    }
+
+    .what-box h3 { color: #0369a1; margin-bottom: 15px; }
+    .what-box p { color: #0c4a6e; }
+
+    .why-box {
+      background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+      border-left: 5px solid #f59e0b;
+      padding: 20px;
+      border-radius: 0 16px 16px 0;
+      margin: 15px 0;
+    }
+
+    .why-box h3 { color: #b45309; margin-bottom: 15px; }
+    .why-box p { color: #78350f; }
+
+    .problem-box {
+      background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%);
+      border-left: 5px solid #ef4444;
+      padding: 20px;
+      border-radius: 0 16px 16px 0;
+      margin: 15px 0;
+    }
+
+    .problem-box h3 { color: #dc2626; margin-bottom: 15px; }
+    .problem-box p { color: #7f1d1d; }
+
+    .solution-box {
+      background: linear-gradient(135deg, #ecfdf5 0%, #a7f3d0 100%);
+      border-left: 5px solid #10b981;
+      padding: 20px;
+      border-radius: 0 16px 16px 0;
+      margin: 15px 0;
+    }
+
+    .solution-box h3 { color: #059669; margin-bottom: 15px; }
+    .solution-box p { color: #064e3b; }
+
+    .big-number {
+      font-size: 150px;
+      font-weight: 800;
+      line-height: 1;
+      background: linear-gradient(135deg, #ef4444, #dc2626);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .dark .big-number {
+      background: linear-gradient(135deg, #ff6b6b, #ff8787);
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
+
+    .score-label {
+      font-size: 32px;
+      color: #666;
+      margin-top: 10px;
+    }
+
+    .dark .score-label { color: rgba(255,255,255,0.7); }
+
+    .card {
+      background: #f8f9fa;
+      padding: 20px;
+      border-radius: 16px;
+      border: 2px solid #e5e7eb;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    }
+
+    .dark .card {
+      background: rgba(255,255,255,0.1);
+      border-color: rgba(255,255,255,0.2);
+    }
+
+    .icon-big {
+      font-size: 64px;
+      margin-bottom: 20px;
+    }
+
+    .comparison {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      margin-top: 30px;
+    }
+
+    .comparison-box {
+      padding: 40px;
+      border-radius: 20px;
+    }
+
+    .comparison-box.bad {
+      background: linear-gradient(135deg, #1f1f1f, #2d2d2d);
+      color: white;
+      border: 2px solid #ef4444;
+    }
+
+    .comparison-box.good {
+      background: linear-gradient(135deg, #059669, #047857);
+      color: white;
+      border: 2px solid #10b981;
+    }
+
+    .comparison-box h3 {
+      font-size: 28px;
+      margin-bottom: 25px;
+    }
+
+    .comparison-box.bad h3 { color: #fca5a5; }
+    .comparison-box.good h3 { color: #a7f3d0; }
+
+    .comparison-box li {
+      color: rgba(255,255,255,0.9);
+      margin-bottom: 15px;
+      font-size: 20px;
+    }
+
+    .cities-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .city-tag {
+      background: rgba(200, 16, 46, 0.1);
+      color: #C8102E;
+      padding: 10px 12px;
+      border-radius: 8px;
+      font-weight: 600;
+      text-align: center;
+      font-size: 13px;
+      transition: all 0.3s ease;
+    }
+
+    .city-tag:hover {
+      background: #C8102E;
+      color: white;
+      transform: scale(1.05);
+    }
+
+    .nav-hint {
+      position: fixed;
+      bottom: 30px;
+      left: 40px;
+      font-size: 14px;
+      color: #999;
+    }
+
+    .dark .nav-hint, .red .nav-hint, .green .nav-hint { color: rgba(255,255,255,0.5); }
+
+    .cta-box {
+      background: white;
+      color: #091353;
+      padding: 50px;
+      border-radius: 20px;
+      text-align: center;
+      margin-top: 40px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    }
+
+    .cta-box h3 {
+      font-size: 32px;
+      color: #091353;
+      margin-bottom: 20px;
+    }
+
+    .cta-box p {
+      color: #555;
+      font-size: 20px;
+    }
+
+    .timeline {
+      position: relative;
+      padding-left: 50px;
+      margin-top: 15px;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 15px;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: linear-gradient(to bottom, #C8102E, #091353);
+      border-radius: 2px;
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 20px;
+      padding: 15px 20px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 12px;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -43px;
+      top: 20px;
+      width: 16px;
+      height: 16px;
+      background: #C8102E;
+      border-radius: 50%;
+      border: 3px solid white;
+    }
+
+    .analogy {
+      background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%);
+      border: 2px solid #8b5cf6;
+      padding: 30px;
+      border-radius: 16px;
+      margin: 25px 0;
+    }
+
+    .analogy h3 { color: #7c3aed; }
+    .analogy p { color: #5b21b6; }
+
+    .stat-row {
+      display: flex;
+      gap: 60px;
+      margin: 40px 0;
+      justify-content: center;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat .number {
+      font-size: 56px;
+      font-weight: 800;
+      color: #C8102E;
+      line-height: 1;
+    }
+
+    .dark .stat .number { color: #ff6b6b; }
+
+    .stat .label {
+      font-size: 20px;
+      color: #666;
+      margin-top: 10px;
+    }
+
+    .dark .stat .label { color: rgba(255,255,255,0.7); }
+
+    .highlight-text {
+      font-size: 36px;
+      font-weight: 700;
+      text-align: center;
+      padding: 40px;
+      background: linear-gradient(135deg, #fef3c7, #fde68a);
+      border-radius: 16px;
+      color: #78350f;
+      margin: 30px 0;
+    }
+
+    .dark .highlight-text {
+      background: rgba(255,255,255,0.1);
+      color: white;
+    }
+
+    /* Progress bar */
+    .progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #00FFFF, #FF00FF);
+      z-index: 1000;
+      transition: width 0.3s ease;
+    }
+
+    /* Build-in animations */
+    .build {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    .build.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Stagger delays for list items */
+    .build-list li {
+      opacity: 0;
+      transform: translateX(-20px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .build-list li.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* Mobile Responsive Styles */
+    @media (max-width: 1024px) {
+      .slide { padding: 30px 40px; }
+      h1 { font-size: 36px; }
+      h2 { font-size: 28px; }
+      h3 { font-size: 18px; }
+      p, li { font-size: 16px; }
+      .subtitle { font-size: 20px; }
+      .two-col { grid-template-columns: 1fr; gap: 20px; }
+      .comparison { grid-template-columns: 1fr; gap: 20px; }
+      .cities-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+      .city-tag { font-size: 11px; padding: 8px; }
+      .big-number { font-size: 100px; }
+      .stat-row { flex-wrap: wrap; gap: 30px; }
+      .stat .number { font-size: 40px; }
+      .stat .label { font-size: 14px; }
+      .highlight-text { font-size: 24px; padding: 25px; }
+      .timeline { padding-left: 40px; }
+      .cta-box { padding: 30px; }
+    }
+
+    @media (max-width: 768px) {
+      .slide { padding: 20px 25px; }
+      h1 { font-size: 28px; }
+      h2 { font-size: 24px; }
+      h3 { font-size: 16px; }
+      p, li { font-size: 14px; }
+      .subtitle { font-size: 16px; }
+      .tag { font-size: 11px; padding: 6px 14px; }
+      .what-box, .why-box, .problem-box, .solution-box, .analogy { padding: 15px; margin: 10px 0; }
+      .card { padding: 15px; }
+      .cities-grid { grid-template-columns: repeat(2, 1fr); }
+      .big-number { font-size: 80px; }
+      .score-label { font-size: 20px; }
+      .stat-row { gap: 20px; }
+      .stat .number { font-size: 32px; }
+      .highlight-text { font-size: 20px; padding: 20px; }
+      .comparison-box { padding: 25px; }
+      .comparison-box h3 { font-size: 20px; }
+      .comparison-box li { font-size: 16px; }
+      .timeline { padding-left: 35px; margin-top: 10px; }
+      .timeline-item { padding: 12px 15px; margin-bottom: 15px; }
+      .timeline-item::before { left: -35px; width: 12px; height: 12px; top: 15px; }
+      .cta-box { padding: 25px; }
+      .cta-box h3 { font-size: 24px; }
+      .nav-hint { font-size: 12px; left: 20px; bottom: 20px; }
+      .slide-number { font-size: 12px; right: 20px; bottom: 20px; }
+    }
+
+    @media (max-width: 480px) {
+      .slide { padding: 15px 20px; }
+      h1 { font-size: 24px; }
+      h2 { font-size: 20px; }
+      .cities-grid { grid-template-columns: 1fr 1fr; }
+      .big-number { font-size: 60px; }
+      .icon-big { font-size: 40px; }
+      .nav-hint { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="progress-bar" id="progressBar"></div>
+  <div class="presentation">
+
+    <!-- Slide 1: Title -->
+    <div class="slide dark active">
+      <div class="flex-center">
+        <div class="tag">Website & SEO Analysis</div>
+        <h1 style="font-size: 64px; margin-bottom: 30px;">Lorenzo's Dog Training Team</h1>
+        <p class="subtitle" style="font-size: 28px; max-width: 800px;">
+          Your website is invisible to potential customers.<br>
+          Let me show you exactly why — and how we fix it.
+        </p>
+        <div style="margin-top: 60px;">
+          <img src="public/gcw-logo.png" alt="Gideon Codeworks" style="height: 100px; margin: 0 auto 20px; display: block;">
+          <p style="font-size: 18px; opacity: 0.7;">josh@gideoncode.com • gideoncode.com</p>
+          <p style="font-size: 16px; opacity: 0.5; margin-top: 10px;">February 2026</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 2: The Big Picture -->
+    <div class="slide">
+      <div class="tag">The Big Picture</div>
+      <h2>What We're Going to Cover</h2>
+
+      <div class="two-col" style="margin-top: 40px;">
+        <div>
+          <div class="card build" style="margin-bottom: 25px;">
+            <div class="icon-big">🔍</div>
+            <h3>The Problems</h3>
+            <p>Why your website isn't showing up when people search for dog training</p>
+          </div>
+          <div class="card build">
+            <div class="icon-big">💡</div>
+            <h3>The Solutions</h3>
+            <p>Exactly what we can do to fix it and get you more customers</p>
+          </div>
+        </div>
+        <div>
+          <div class="card build" style="margin-bottom: 25px;">
+            <div class="icon-big">📊</div>
+            <h3>The Opportunities</h3>
+            <p>Money you're leaving on the table that competitors are taking</p>
+          </div>
+          <div class="card build">
+            <div class="icon-big">🚀</div>
+            <h3>The Plan</h3>
+            <p>How we get you from invisible to dominant in local search</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 3: Health Score -->
+    <div class="slide dark">
+      <div class="flex-center">
+        <div class="tag">Current State</div>
+        <h2 style="margin-bottom: 10px;">Your Website Health Score</h2>
+        <div class="big-number">32</div>
+        <p class="score-label">out of 100</p>
+        <p style="margin-top: 40px; font-size: 28px; max-width: 700px; text-align: center; opacity: 0.9;">
+          This score measures how well Google can find, understand, and rank your website.
+        </p>
+      </div>
+    </div>
+
+    <!-- Slide 4: What does 32 mean? -->
+    <div class="slide">
+      <div class="tag">Understanding the Score</div>
+      <h2>What Does a 32 Actually Mean?</h2>
+
+      <div class="analogy build">
+        <h3>🏪 Think of it like a storefront...</h3>
+        <p style="font-size: 22px; margin-top: 15px;">
+          Imagine you have an amazing dog training facility, but it's located on a back alley with no sign, no address visible from the street, and the door is locked. People driving by don't even know you exist.
+        </p>
+        <p style="font-size: 22px; margin-top: 15px;">
+          <strong>That's your website right now.</strong> The content is there, but Google can't find it, can't read it properly, and doesn't know who it's for.
+        </p>
+      </div>
+
+      <div class="what-box build">
+        <h3>📍 What This Means for Your Business</h3>
+        <p>When someone in Cleveland searches "dog trainer near me" — you don't show up. They find your competitors instead. Every single day, potential customers are searching for exactly what you offer, and they're going to someone else.</p>
+      </div>
+    </div>
+
+    <!-- Slide 5: Search Test -->
+    <div class="slide">
+      <div class="tag">The Search Test</div>
+      <h2>I Searched for Your Services. Here's What Happened.</h2>
+
+      <p style="margin-bottom: 30px; font-size: 22px;">I pretended to be a potential customer and searched Google:</p>
+
+      <div class="two-col">
+        <div class="problem-box build">
+          <h3>"Dog training Cleveland"</h3>
+          <p><strong>Lorenzo's:</strong> Not found in first 3 pages</p>
+          <p style="margin-top: 10px; font-size: 18px;">Your competitors are ranking instead.</p>
+        </div>
+        <div class="problem-box build">
+          <h3>"Dog trainer near me"</h3>
+          <p><strong>Lorenzo's:</strong> Not found</p>
+          <p style="margin-top: 10px; font-size: 18px;">This is the #1 search people use.</p>
+        </div>
+        <div class="problem-box build">
+          <h3>"Service dog training Ohio"</h3>
+          <p><strong>Lorenzo's:</strong> Not found</p>
+          <p style="margin-top: 10px; font-size: 18px;">High-value service, zero visibility.</p>
+        </div>
+        <div class="problem-box build">
+          <h3>"Behavioral dog training"</h3>
+          <p><strong>Lorenzo's:</strong> Not found</p>
+          <p style="margin-top: 10px; font-size: 18px;">Your specialty — and you're invisible.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 6: Why This Matters -->
+    <div class="slide red">
+      <div class="flex-center">
+        <div class="tag">Why This Matters</div>
+        <h2 style="font-size: 48px; margin-bottom: 40px;">Every Day You're Not Ranking...</h2>
+        <div style="font-size: 32px; max-width: 800px; text-align: center; line-height: 1.8;">
+          <p class="build" style="margin-bottom: 15px;">Potential customers are searching for dog training.</p>
+          <p class="build" style="margin-bottom: 15px;">They're finding your competitors.</p>
+          <p class="build" style="margin-bottom: 15px;">They're booking with your competitors.</p>
+          <p class="build" style="font-weight: bold;">And you never even knew they existed.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 7: Issue 1 - Meta Descriptions -->
+    <div class="slide">
+      <div class="tag">Issue #1</div>
+      <h2>Missing Meta Descriptions</h2>
+
+      <div class="what-box build">
+        <h3>🤔 What is a meta description?</h3>
+        <p>It's the short summary that appears under your website name in Google search results. It's like a mini-advertisement that tells people what your page is about and why they should click.</p>
+      </div>
+
+      <div class="why-box build">
+        <h3>⚠️ Why does this matter?</h3>
+        <p>Without meta descriptions, Google just grabs random text from your page. It often looks messy and confusing. People see a jumbled preview and skip to a competitor whose description clearly says "Professional dog training in Cleveland - Call today!"</p>
+      </div>
+
+      <div class="problem-box build">
+        <h3>🔴 Your Current Status</h3>
+        <p><strong>Zero pages</strong> on your website have meta descriptions. Every single page is showing random, confusing text in search results.</p>
+      </div>
+    </div>
+
+    <!-- Slide 8: Issue 2 - Multiple H1 Tags -->
+    <div class="slide">
+      <div class="tag">Issue #2</div>
+      <h2>Multiple H1 Tags (Confusing Headlines)</h2>
+
+      <div class="what-box build">
+        <h3>🤔 What is an H1 tag?</h3>
+        <p>It's the main headline of your page — like the title of a chapter in a book. It tells Google "This is what this page is about." Every page should have exactly ONE main topic.</p>
+      </div>
+
+      <div class="why-box build">
+        <h3>⚠️ Why does this matter?</h3>
+        <p>When you have multiple H1s, it's like having a book chapter with 5 different titles. Google gets confused: "Is this page about puppy training? Service dogs? Obedience? Locations?" When Google is confused, it doesn't rank you.</p>
+      </div>
+
+      <div class="problem-box build">
+        <h3>🔴 Your Current Status</h3>
+        <p>Your pages have <strong>multiple H1 tags</strong>, sending mixed signals to Google about what each page is actually about.</p>
+      </div>
+    </div>
+
+    <!-- Slide 9: Issue 3 - Image Alt Text -->
+    <div class="slide">
+      <div class="tag">Issue #3</div>
+      <h2>All Images Missing Alt Text</h2>
+
+      <div class="what-box build">
+        <h3>🤔 What is alt text?</h3>
+        <p>Alt text is a description you add to images that tells Google what the picture shows. Google can't "see" images — it can only read text. So without alt text, all your photos of dogs, training sessions, and facilities are invisible to Google.</p>
+      </div>
+
+      <div class="why-box build">
+        <h3>⚠️ Why does this matter?</h3>
+        <p>You probably have dozens of photos showing happy dogs, professional training, beautiful facilities. Each of those could help you rank in Google Image search and regular search. Instead, Google sees... nothing. It's like having billboards that are completely blank.</p>
+      </div>
+
+      <div class="problem-box build">
+        <h3>🔴 Your Current Status</h3>
+        <p><strong>100% of your images</strong> are missing alt text. You're losing massive SEO value from every single photo on your site.</p>
+      </div>
+    </div>
+
+    <!-- Slide 10: Issue 4 - Ghost Website -->
+    <div class="slide dark">
+      <div class="tag">Major Discovery</div>
+      <h2>You Have a Ghost Website</h2>
+
+      <div class="what-box build" style="background: rgba(255,255,255,0.1); border-left-color: #ff6b6b;">
+        <h3 style="color: #fca5a5;">🤔 What do I mean by "ghost website"?</h3>
+        <p style="color: rgba(255,255,255,0.9);">Your OLD website (built on Joomla) is still being indexed by Google. So there are two versions of your business floating around the internet — your old site and your current Squarespace site.</p>
+      </div>
+
+      <div class="why-box build" style="background: rgba(255,255,255,0.1); border-left-color: #fbbf24;">
+        <h3 style="color: #fcd34d;">⚠️ Why is this a problem?</h3>
+        <p style="color: rgba(255,255,255,0.9);">Google sees both sites and gets confused. It doesn't know which one is "real." So instead of giving you full credit, it splits your ranking power between two sites. It's like having two half-strength versions of yourself competing against full-strength competitors.</p>
+      </div>
+
+      <p class="build" style="margin-top: 30px; font-size: 18px; opacity: 0.8;">
+        <strong>Old URLs still appearing in Google:</strong><br>
+        <code style="background: rgba(255,255,255,0.1); padding: 10px 15px; border-radius: 5px; display: inline-block; margin-top: 10px;">
+          http://www.lorenzosdogtrainingteam.com/index.php/locations2?id=39
+        </code>
+      </p>
+    </div>
+
+    <!-- Slide 11: Issue 5 - No Local Pages -->
+    <div class="slide">
+      <div class="tag">Issue #4</div>
+      <h2>No Local Landing Pages</h2>
+
+      <div class="what-box build">
+        <h3>🤔 What is a local landing page?</h3>
+        <p>It's a page specifically created for each city you serve. So instead of one generic "Locations" page, you'd have "Dog Training in Cleveland, OH" and "Dog Training in San Diego, CA" and so on — each as its own page.</p>
+      </div>
+
+      <div class="why-box build">
+        <h3>⚠️ Why does this matter?</h3>
+        <p>When someone searches "dog training San Diego" — Google looks for pages specifically about dog training in San Diego. If you don't have one, you won't rank. Your competitors who DO have city-specific pages will beat you every time.</p>
+      </div>
+
+      <div class="stat-row build">
+        <div class="stat">
+          <div class="number">11</div>
+          <div class="label">States You Serve</div>
+        </div>
+        <div class="stat">
+          <div class="number">19</div>
+          <div class="label">Cities with Trainers</div>
+        </div>
+        <div class="stat">
+          <div class="number">26</div>
+          <div class="label">Trainers with Photos</div>
+        </div>
+        <div class="stat">
+          <div class="number" style="color: #ef4444;">0</div>
+          <div class="label">City Landing Pages</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 12: The Opportunity -->
+    <div class="slide">
+      <div class="tag">The Opportunity</div>
+      <h2>19 Cities = 19 Chances to Rank #1</h2>
+
+      <p class="build" style="margin-bottom: 20px;">Each city could have its own page, targeting searches like:</p>
+
+      <div class="cities-grid build">
+        <div class="city-tag">Cleveland, OH</div>
+        <div class="city-tag">Reynoldsburg, OH</div>
+        <div class="city-tag">San Diego, CA</div>
+        <div class="city-tag">San Jose, CA</div>
+        <div class="city-tag">Houston, TX</div>
+        <div class="city-tag">San Antonio, TX</div>
+        <div class="city-tag">Fort Worth, TX</div>
+        <div class="city-tag">Atlanta, GA</div>
+        <div class="city-tag">Pensacola, FL</div>
+        <div class="city-tag">Crestview, FL</div>
+        <div class="city-tag">Milton, FL</div>
+        <div class="city-tag">Navarre, FL</div>
+        <div class="city-tag">Hammond, IN</div>
+        <div class="city-tag">Versailles, KY</div>
+        <div class="city-tag">Boston, MA</div>
+        <div class="city-tag">Ann Arbor, MI</div>
+        <div class="city-tag">Hays, KS</div>
+        <div class="city-tag">Nashua, NH</div>
+        <div class="city-tag">Durham, NH</div>
+        <div class="city-tag" style="background: #091353; color: white;">= 19 Rankings</div>
+      </div>
+
+      <div class="highlight-text build" style="margin-top: 40px;">
+        Right now, competitors own ALL of these searches.
+      </div>
+    </div>
+
+    <!-- Slide 13: Issue 6 - No Blog -->
+    <div class="slide">
+      <div class="tag">Issue #5</div>
+      <h2>No Blog or Fresh Content</h2>
+
+      <div class="what-box build">
+        <h3>🤔 Why does a dog trainer need a blog?</h3>
+        <p>A blog isn't about writing essays. It's about answering questions people are Googling. When someone searches "how to stop my dog from barking" — if you have an article about that, YOU show up. Now they know you exist. Now they might hire you.</p>
+      </div>
+
+      <div class="why-box build">
+        <h3>⚠️ What are you missing?</h3>
+        <p>Thousands of people search dog training questions every month. "Puppy biting," "leash aggression," "crate training tips." Each article is a new door into your business. With zero articles, you have zero doors.</p>
+      </div>
+
+      <div class="two-col">
+        <div class="card build">
+          <h3>Blog Ideas That Attract Customers</h3>
+          <ul>
+            <li>"How to stop leash aggression"</li>
+            <li>"Puppy training timeline"</li>
+            <li>"Signs your dog needs training"</li>
+            <li>"Service dog requirements guide"</li>
+          </ul>
+        </div>
+        <div class="card build">
+          <h3>Each Article = New Customers</h3>
+          <p>Someone searching "puppy biting help" is a <strong>potential customer</strong>. They have a problem. You have the solution. A blog article connects you.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 14: Issue 7 - No Lead Capture -->
+    <div class="slide">
+      <div class="tag">Issue #6</div>
+      <h2>No Lead Capture System</h2>
+
+      <div class="what-box build">
+        <h3>🤔 What is lead capture?</h3>
+        <p>It's a way to get contact info from visitors who aren't ready to call yet. Maybe they're browsing at 11pm. Maybe they're comparing options. A chatbot, email signup, or quick form lets them engage without commitment — and lets you follow up later.</p>
+      </div>
+
+      <div class="why-box build">
+        <h3>⚠️ Why does this matter?</h3>
+        <p>Most website visitors leave without doing anything. They looked, they left, they forgot about you. With lead capture, you get their email or start a chat. Now you can follow up. "Hey, still looking for dog training?" That follow-up converts browsers into buyers.</p>
+      </div>
+
+      <div class="problem-box build">
+        <h3>🔴 Your Current Status</h3>
+        <p>No chatbot. No email capture. Visitors come, look around, and vanish forever. You have no way to reconnect with people who showed interest but weren't ready to call.</p>
+      </div>
+    </div>
+
+    <!-- Slide 15: The Ads Trap -->
+    <div class="slide red">
+      <div class="tag">The Bigger Problem</div>
+      <h2>You're Renting Customers Instead of Owning Them</h2>
+
+      <div class="two-col" style="margin-top: 30px;">
+        <div class="card build" style="background: rgba(0,0,0,0.3); border: none;">
+          <h3 style="color: #fca5a5;">Paid Ads (What You Do Now)</h3>
+          <ul style="margin-top: 20px;">
+            <li>Stop paying = stop getting leads</li>
+            <li>Costs go up every year</li>
+            <li>Competitors can outbid you</li>
+            <li>No long-term value built</li>
+            <li><strong>You're renting your customers</strong></li>
+          </ul>
+        </div>
+        <div class="card build" style="background: rgba(255,255,255,0.2); border: none;">
+          <h3 style="color: #a7f3d0;">Organic SEO (What You Could Have)</h3>
+          <ul style="margin-top: 20px;">
+            <li>Traffic keeps coming — free</li>
+            <li>Compounds over time</li>
+            <li>Builds trust and authority</li>
+            <li>You OWN your rankings</li>
+            <li><strong>You own your customers</strong></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="highlight-text build" style="background: rgba(255,255,255,0.15); color: white; margin-top: 40px;">
+        You have 40 years of credibility. Why rent traffic when you could own it?
+      </div>
+    </div>
+
+    <!-- Slide 16: The Solution Overview -->
+    <div class="slide green">
+      <div class="flex-center">
+        <div class="tag">The Solution</div>
+        <h2 style="font-size: 48px; margin-bottom: 30px;">A Website Built for Growth</h2>
+        <p style="font-size: 28px; max-width: 800px; text-align: center;">
+          Not just a pretty website.<br>
+          A <strong>customer-generating machine</strong> that works 24/7.
+        </p>
+      </div>
+    </div>
+
+    <!-- Slide 17: Solution Detail 1 -->
+    <div class="slide">
+      <div class="tag">Solution</div>
+      <h2>Custom-Built, SEO-First Website</h2>
+
+      <div class="two-col">
+        <div>
+          <div class="solution-box build">
+            <h3>⚡ Lightning Fast</h3>
+            <p>Google ranks fast websites higher. We build with modern technology that loads in under 2 seconds. Your current site? Much slower.</p>
+          </div>
+          <div class="solution-box build">
+            <h3>📱 Mobile Perfect</h3>
+            <p>60%+ of searches happen on phones. Your site will look amazing and work perfectly on every device.</p>
+          </div>
+        </div>
+        <div>
+          <div class="solution-box build">
+            <h3>🎯 SEO Built-In</h3>
+            <p>Every page will have proper meta descriptions, single H1 tags, image alt text, and schema markup. Google will understand exactly what you offer.</p>
+          </div>
+          <div class="solution-box build">
+            <h3>🏆 Clean Code</h3>
+            <p>No Squarespace bloat. No leftover Joomla ghost. One clean, fast, professional website that Google loves.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 18: Solution Detail 2 -->
+    <div class="slide">
+      <div class="tag">Solution</div>
+      <h2>19 Local Landing Pages</h2>
+
+      <div class="analogy build">
+        <h3>🎯 Think of it like this...</h3>
+        <p style="font-size: 22px; margin-top: 15px;">
+          Instead of one fishing line in the water, you'll have 19 fishing lines — each one in a different city, catching customers searching for dog training in that specific location.
+        </p>
+      </div>
+
+      <div class="two-col">
+        <div class="solution-box build">
+          <h3>Each City Page Includes:</h3>
+          <ul>
+            <li>City-specific content</li>
+            <li>Local keywords optimized</li>
+            <li>Google Maps integration</li>
+            <li>Local testimonials</li>
+            <li>Service area details</li>
+          </ul>
+        </div>
+        <div class="solution-box build">
+          <h3>Target Searches Like:</h3>
+          <ul>
+            <li>"Dog training Cleveland OH"</li>
+            <li>"Dog trainer near me" (in each city)</li>
+            <li>"Puppy training San Diego"</li>
+            <li>"Service dog training Houston"</li>
+            <li>"Behavioral dog training Atlanta"</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 19: Sample Landing Page -->
+    <div class="slide dark">
+      <div class="tag">Live Example</div>
+      <h2>Sample: Cleveland Landing Page</h2>
+      <p style="margin-bottom: 20px;">Here's what a city-specific landing page looks like. Click to view the full page.</p>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 20px;">
+        <div style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.3);">
+          <div style="background: linear-gradient(135deg, #091353, #1a1a4e); color: white; padding: 20px;">
+            <div style="font-size: 11px; background: #C8102E; display: inline-block; padding: 4px 10px; border-radius: 10px; margin-bottom: 10px;">📍 Cleveland, OH</div>
+            <div style="font-size: 20px; font-weight: 700;">Dog Training in Cleveland, OH</div>
+            <div style="font-size: 12px; opacity: 0.8; margin-top: 5px;">Behavioral • Obedience • Service Dogs</div>
+          </div>
+          <div style="padding: 15px; color: #333;">
+            <div style="font-size: 12px; font-weight: 600; color: #091353; margin-bottom: 10px;">✓ Local trainers shown</div>
+            <div style="font-size: 12px; font-weight: 600; color: #091353; margin-bottom: 10px;">✓ Cleveland neighborhoods listed</div>
+            <div style="font-size: 12px; font-weight: 600; color: #091353; margin-bottom: 10px;">✓ Local testimonials</div>
+            <div style="font-size: 12px; font-weight: 600; color: #091353; margin-bottom: 10px;">✓ Google Maps embedded</div>
+            <div style="font-size: 12px; font-weight: 600; color: #10b981;">✓ Schema markup for Google</div>
+          </div>
+        </div>
+
+        <div>
+          <div class="what-box" style="background: rgba(255,255,255,0.1); border-left-color: #10b981;">
+            <h3 style="color: #a7f3d0;">What makes this page rank:</h3>
+            <ul style="margin-top: 10px; color: rgba(255,255,255,0.9);">
+              <li><strong>Title:</strong> "Dog Training Cleveland OH"</li>
+              <li><strong>URL:</strong> /locations/cleveland-oh</li>
+              <li><strong>H1:</strong> One clear headline about Cleveland</li>
+              <li><strong>Content:</strong> Mentions Cleveland 10+ times naturally</li>
+              <li><strong>Trainers:</strong> Shows Lorenzo, Eric, JD, Shannon</li>
+              <li><strong>Schema:</strong> Tells Google this is a local business</li>
+            </ul>
+          </div>
+          <a href="sample-cleveland-landing.html" target="_blank" style="display: inline-block; background: #C8102E; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; margin-top: 15px;">View Full Sample Page →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 20: Solution Detail 3 -->
+    <div class="slide">
+      <div class="tag">Solution</div>
+      <h2>AI Chatbot + Lead Capture</h2>
+
+      <div class="what-box build">
+        <h3>💬 24/7 Lead Generation</h3>
+        <p>An AI chatbot that answers questions, qualifies leads, and captures contact info — even at 2am on a Sunday. When you wake up Monday, you have a list of interested prospects ready to call.</p>
+      </div>
+
+      <div class="two-col">
+        <div class="card build">
+          <h3>What the Chatbot Does</h3>
+          <ul>
+            <li>Answers common questions instantly</li>
+            <li>Asks about their dog's needs</li>
+            <li>Captures name, email, phone</li>
+            <li>Books consultation calls</li>
+            <li>Works while you sleep</li>
+          </ul>
+        </div>
+        <div class="card build">
+          <h3>No More Lost Visitors</h3>
+          <p>Right now, someone visits your site at 10pm, looks around, and leaves. Gone forever.</p>
+          <p style="margin-top: 15px;">With the chatbot, they ask a question, get an answer, and give you their email. Now you can follow up.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 20: Fully Managed -->
+    <div class="slide">
+      <div class="tag">How It Works</div>
+      <h2>We Handle Everything For You</h2>
+
+      <div class="analogy build">
+        <h3>🤝 Think of us like your IT department...</h3>
+        <p style="font-size: 22px; margin-top: 15px;">
+          Need something changed on your website? Just tell us. We'll handle it within 24 hours. No login. No learning curve. No stress. You focus on training dogs — we handle the website.
+        </p>
+      </div>
+
+      <div class="two-col">
+        <div class="solution-box build">
+          <h3>What "Fully Managed" Means</h3>
+          <ul>
+            <li>Add new trainers — we do it</li>
+            <li>Update services — we do it</li>
+            <li>Post blog articles — we do it</li>
+            <li>Add new locations — we do it</li>
+            <li>Fix anything — we do it</li>
+          </ul>
+        </div>
+        <div class="card build">
+          <h3>Unlike Hibu or Big Agencies</h3>
+          <ul>
+            <li><strong>You own your website</strong> — it's yours forever</li>
+            <li><strong>Custom built</strong> — not a template</li>
+            <li><strong>Fair pricing</strong> — fraction of agency costs</li>
+            <li><strong>Personal service</strong> — real humans, not tickets</li>
+            <li><strong>No lock-in</strong> — leave anytime with your code</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 21: Before/After -->
+    <div class="slide">
+      <div class="tag">The Transformation</div>
+      <h2>Before vs. After</h2>
+
+      <div class="comparison">
+        <div class="comparison-box bad build">
+          <h3>❌ Current Situation</h3>
+          <ul class="build-list" style="list-style: none; margin-left: 0;">
+            <li>❌ Invisible in local searches</li>
+            <li>❌ No meta descriptions</li>
+            <li>❌ Ghost site confusing Google</li>
+            <li>❌ Zero city landing pages</li>
+            <li>❌ No blog content</li>
+            <li>❌ No lead capture</li>
+            <li>❌ Paying for every click</li>
+            <li>❌ 40 years of authority wasted</li>
+          </ul>
+        </div>
+        <div class="comparison-box good build">
+          <h3>✅ After We're Done</h3>
+          <ul class="build-list" style="list-style: none; margin-left: 0;">
+            <li>✅ Ranking in local searches</li>
+            <li>✅ Optimized meta tags everywhere</li>
+            <li>✅ One clean, authoritative site</li>
+            <li>✅ 19 city landing pages</li>
+            <li>✅ Blog attracting customers</li>
+            <li>✅ AI chatbot capturing leads 24/7</li>
+            <li>✅ Organic traffic you OWN</li>
+            <li>✅ 40 years of authority leveraged</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 22: Timeline -->
+    <div class="slide dark">
+      <div class="tag">The Process</div>
+      <h2>How We Get You There</h2>
+
+      <div class="two-col" style="gap: 40px;">
+        <div class="timeline">
+          <div class="timeline-item build">
+            <h3 style="color: white; font-size: 18px; margin-bottom: 5px;">Phase 1: Foundation</h3>
+            <p style="font-size: 15px;">Build new custom website, migrate content, set up SEO architecture, kill the ghost site</p>
+          </div>
+          <div class="timeline-item build">
+            <h3 style="color: white; font-size: 18px; margin-bottom: 5px;">Phase 2: Local SEO</h3>
+            <p style="font-size: 15px;">Create 19 city landing pages, optimize Google Business, build local authority</p>
+          </div>
+          <div class="timeline-item build">
+            <h3 style="color: white; font-size: 18px; margin-bottom: 5px;">Phase 3: Lead Generation</h3>
+            <p style="font-size: 15px;">Install AI chatbot, set up lead capture forms, connect to your CRM</p>
+          </div>
+          <div class="timeline-item build">
+            <h3 style="color: white; font-size: 18px; margin-bottom: 5px;">Phase 4: Growth</h3>
+            <p style="font-size: 15px;">Launch blog, ongoing SEO optimization, monthly performance reports</p>
+          </div>
+        </div>
+        <div>
+          <div class="card build" style="background: rgba(255,255,255,0.1); padding: 20px;">
+            <h3 style="color: #a7f3d0; font-size: 18px;">What You Get:</h3>
+            <ul style="margin-top: 12px; font-size: 15px;">
+              <li style="margin-bottom: 8px;">Complete custom website</li>
+              <li style="margin-bottom: 8px;">19 local landing pages</li>
+              <li style="margin-bottom: 8px;">AI chatbot system</li>
+              <li style="margin-bottom: 8px;">Blog platform</li>
+              <li style="margin-bottom: 8px;">All SEO optimization</li>
+              <li style="margin-bottom: 8px;">Hosting & maintenance</li>
+              <li style="margin-bottom: 8px;">24-hour change requests</li>
+              <li style="margin-bottom: 0;">Monthly analytics reports</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 23: The Cost of Waiting -->
+    <div class="slide">
+      <div class="tag">The Reality</div>
+      <h2>The Cost of Doing Nothing</h2>
+
+      <div class="problem-box build" style="padding: 25px;">
+        <h3 style="font-size: 22px;">Every month you wait:</h3>
+        <ul class="build-list" style="margin-top: 15px; font-size: 18px;">
+          <li>Competitors strengthen their rankings (harder for you to catch up)</li>
+          <li>You keep paying for ads that build nothing long-term</li>
+          <li>Potential customers go to competitors they found on Google</li>
+          <li>Your 40 years of reputation sits unused online</li>
+        </ul>
+      </div>
+
+      <div class="highlight-text build" style="font-size: 28px; padding: 30px;">
+        SEO is a compounding asset. The longer you wait to start, the longer it takes to see results — and the further ahead your competitors get.
+      </div>
+    </div>
+
+    <!-- Slide 24: Final CTA -->
+    <div class="slide red">
+      <div class="flex-center">
+        <div class="tag" style="background: rgba(255,255,255,0.2);">Next Steps</div>
+        <h1 style="font-size: 52px; margin-bottom: 40px;">Let's Fix This Together</h1>
+
+        <div class="cta-box" style="max-width: 650px;">
+          <h3>Schedule a Strategy Call</h3>
+          <p>Let's discuss your goals and create a custom plan for Lorenzo's Dog Training Team.</p>
+          <p style="margin-top: 20px; font-size: 24px; color: #C8102E; font-weight: 700;">
+            "Serious Training" deserves Serious Marketing
+          </p>
+          <div style="margin-top: 30px;">
+            <img src="public/gcw-logo.png" alt="Gideon Codeworks" style="height: 80px; margin: 0 auto 15px; display: block;">
+            <p style="font-size: 18px; color: #091353; font-weight: 600;">josh@gideoncode.com</p>
+            <p style="font-size: 16px; color: #666; margin-top: 5px;">gideoncode.com</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="slide-number">Slide <span id="currentSlide">1</span> / <span id="totalSlides">24</span></div>
+    <div class="nav-hint">← → Slides | ↓ Build items | Click to advance</div>
+  </div>
+
+  <script>
+    const slides = document.querySelectorAll('.slide');
+    let currentSlide = 0;
+
+    document.getElementById('totalSlides').textContent = slides.length;
+
+    function updateProgressBar() {
+      const progress = ((currentSlide + 1) / slides.length) * 100;
+      document.getElementById('progressBar').style.width = progress + '%';
+    }
+
+    // Get all build items in a slide in DOM order
+    function getBuildItems(slide) {
+      // Get all build items in DOM order using a single selector
+      return [...slide.querySelectorAll('.build, .build-list li')];
+    }
+
+    // Reset all build items in a slide to hidden
+    function resetBuildItems(slide) {
+      const items = getBuildItems(slide);
+      items.forEach(item => item.classList.remove('visible'));
+    }
+
+    // Show next hidden build item, return true if there was one
+    function showNextBuildItem() {
+      const slide = slides[currentSlide];
+      const items = getBuildItems(slide);
+      const hiddenItem = items.find(item => !item.classList.contains('visible'));
+
+      if (hiddenItem) {
+        hiddenItem.classList.add('visible');
+        return true;
+      }
+      return false;
+    }
+
+    // Check if all build items are visible
+    function allBuildItemsVisible() {
+      const slide = slides[currentSlide];
+      const items = getBuildItems(slide);
+      return items.every(item => item.classList.contains('visible'));
+    }
+
+    function showSlide(n, direction = 1) {
+      // Remove active from current
+      slides[currentSlide].classList.remove('active');
+      slides[currentSlide].style.opacity = '0';
+      slides[currentSlide].style.transform = direction > 0 ? 'translateX(-100px)' : 'translateX(100px)';
+
+      // Reset build items on old slide
+      resetBuildItems(slides[currentSlide]);
+
+      // Update index
+      currentSlide = (n + slides.length) % slides.length;
+
+      // Show new slide
+      slides[currentSlide].style.display = 'flex';
+      slides[currentSlide].style.transform = direction > 0 ? 'translateX(100px)' : 'translateX(-100px)';
+
+      // Trigger reflow
+      slides[currentSlide].offsetHeight;
+
+      // Animate in
+      slides[currentSlide].classList.add('active');
+      slides[currentSlide].style.opacity = '1';
+      slides[currentSlide].style.transform = 'translateX(0)';
+
+      document.getElementById('currentSlide').textContent = currentSlide + 1;
+      updateProgressBar();
+    }
+
+    function goForward() {
+      // First try to show the next build item
+      if (!showNextBuildItem()) {
+        // If no more build items, go to next slide
+        showSlide(currentSlide + 1, 1);
+      }
+    }
+
+    function goBack() {
+      showSlide(currentSlide - 1, -1);
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') {
+        // Right arrow: next slide
+        e.preventDefault();
+        showSlide(currentSlide + 1, 1);
+      } else if (e.key === 'ArrowLeft') {
+        // Left arrow: previous slide
+        e.preventDefault();
+        showSlide(currentSlide - 1, -1);
+      } else if (e.key === 'ArrowDown' || e.key === ' ') {
+        // Down arrow or space: reveal next build item
+        e.preventDefault();
+        showNextBuildItem();
+      } else if (e.key === 'ArrowUp') {
+        // Up arrow: show all build items at once
+        e.preventDefault();
+        const slide = slides[currentSlide];
+        const items = getBuildItems(slide);
+        items.forEach(item => item.classList.add('visible'));
+      }
+    });
+
+    document.addEventListener('click', (e) => {
+      if (e.target.tagName !== 'A' && e.target.tagName !== 'BUTTON') {
+        // Click reveals next build item, or goes to next slide if all visible
+        goForward();
+      }
+    });
+
+    // Initialize
+    updateProgressBar();
+    slides[0].style.opacity = '1';
+    slides[0].style.transform = 'translateX(0)';
+  </script>
+</body>
+</html>
