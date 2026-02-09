@@ -458,62 +458,91 @@
     }
 
     /* Mobile Responsive Styles */
-    @media (max-width: 1024px) {
-      .slide { padding: 30px 40px; }
-      h1 { font-size: 36px; }
-      h2 { font-size: 28px; }
-      h3 { font-size: 18px; }
-      p, li { font-size: 16px; }
-      .subtitle { font-size: 20px; }
-      .two-col { grid-template-columns: 1fr; gap: 20px; }
-      .comparison { grid-template-columns: 1fr; gap: 20px; }
-      .cities-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
-      .city-tag { font-size: 11px; padding: 8px; }
-      .big-number { font-size: 100px; }
-      .stat-row { flex-wrap: wrap; gap: 30px; }
-      .stat .number { font-size: 40px; }
-      .stat .label { font-size: 14px; }
-      .highlight-text { font-size: 24px; padding: 25px; }
-      .timeline { padding-left: 40px; }
-      .cta-box { padding: 30px; }
-    }
-
     @media (max-width: 768px) {
-      .slide { padding: 20px 25px; }
-      h1 { font-size: 28px; }
-      h2 { font-size: 24px; }
-      h3 { font-size: 16px; }
-      p, li { font-size: 14px; }
-      .subtitle { font-size: 16px; }
-      .tag { font-size: 11px; padding: 6px 14px; }
-      .what-box, .why-box, .problem-box, .solution-box, .analogy { padding: 15px; margin: 10px 0; }
-      .card { padding: 15px; }
-      .cities-grid { grid-template-columns: repeat(2, 1fr); }
-      .big-number { font-size: 80px; }
-      .score-label { font-size: 20px; }
-      .stat-row { gap: 20px; }
-      .stat .number { font-size: 32px; }
-      .highlight-text { font-size: 20px; padding: 20px; }
-      .comparison-box { padding: 25px; }
-      .comparison-box h3 { font-size: 20px; }
-      .comparison-box li { font-size: 16px; }
-      .timeline { padding-left: 35px; margin-top: 10px; }
-      .timeline-item { padding: 12px 15px; margin-bottom: 15px; }
-      .timeline-item::before { left: -35px; width: 12px; height: 12px; top: 15px; }
-      .cta-box { padding: 25px; }
-      .cta-box h3 { font-size: 24px; }
-      .nav-hint { font-size: 12px; left: 20px; bottom: 20px; }
-      .slide-number { font-size: 12px; right: 20px; bottom: 20px; }
-    }
+      body { overflow: auto; }
 
-    @media (max-width: 480px) {
-      .slide { padding: 15px 20px; }
-      h1 { font-size: 24px; }
-      h2 { font-size: 20px; }
-      .cities-grid { grid-template-columns: 1fr 1fr; }
-      .big-number { font-size: 60px; }
-      .icon-big { font-size: 40px; }
+      .slide {
+        padding: 20px 16px;
+        padding-bottom: 60px;
+        height: auto;
+        min-height: 100vh;
+        overflow: visible;
+        position: relative;
+      }
+
+      .slide.active {
+        display: block;
+      }
+
+      .flex-center {
+        height: auto;
+        padding: 40px 0;
+      }
+
+      h1 { font-size: 24px !important; margin-bottom: 12px; }
+      h2 { font-size: 20px !important; margin-bottom: 12px; }
+      h3 { font-size: 15px !important; margin-bottom: 8px; }
+      p, li { font-size: 14px !important; line-height: 1.4; }
+      .subtitle { font-size: 16px !important; margin-bottom: 20px; }
+      .tag { font-size: 10px; padding: 5px 12px; margin-bottom: 12px; }
+
+      .two-col { grid-template-columns: 1fr; gap: 12px; margin-top: 16px; }
+      .comparison { grid-template-columns: 1fr; gap: 12px; margin-top: 16px; }
+
+      .what-box, .why-box, .problem-box, .solution-box, .analogy {
+        padding: 12px;
+        margin: 8px 0;
+        border-radius: 8px;
+      }
+      .what-box h3, .why-box h3, .problem-box h3, .solution-box h3, .analogy h3 {
+        font-size: 14px !important;
+      }
+
+      .card { padding: 12px; border-radius: 10px; margin-bottom: 10px; }
+      .icon-big { font-size: 32px; margin-bottom: 10px; }
+
+      .cities-grid { grid-template-columns: repeat(2, 1fr); gap: 6px; margin-top: 12px; }
+      .city-tag { font-size: 10px; padding: 6px 4px; border-radius: 4px; }
+
+      .big-number { font-size: 64px; }
+      .score-label { font-size: 18px; }
+
+      .stat-row {
+        flex-wrap: wrap;
+        gap: 16px;
+        justify-content: center;
+        margin: 20px 0;
+      }
+      .stat { min-width: 80px; }
+      .stat .number { font-size: 28px; }
+      .stat .label { font-size: 11px; }
+
+      .highlight-text { font-size: 16px !important; padding: 16px; margin: 16px 0; }
+
+      .comparison-box { padding: 16px; border-radius: 12px; }
+      .comparison-box h3 { font-size: 16px !important; margin-bottom: 12px; }
+      .comparison-box li { font-size: 13px !important; margin-bottom: 8px; }
+      .comparison-box ul { margin-left: 16px; }
+
+      .timeline { padding-left: 30px; margin-top: 12px; }
+      .timeline::before { left: 10px; width: 3px; }
+      .timeline-item { padding: 10px 12px; margin-bottom: 12px; border-radius: 8px; }
+      .timeline-item::before { left: -28px; width: 10px; height: 10px; top: 14px; border-width: 2px; }
+      .timeline-item h3 { font-size: 14px !important; }
+      .timeline-item p { font-size: 12px !important; }
+
+      .cta-box { padding: 20px; border-radius: 12px; margin-top: 20px; }
+      .cta-box h3 { font-size: 20px !important; }
+      .cta-box p { font-size: 14px !important; }
+      .cta-box img { height: 50px !important; }
+
       .nav-hint { display: none; }
+      .slide-number { font-size: 11px; right: 16px; bottom: 16px; }
+      .progress-bar { height: 3px; }
+
+      /* Title slide adjustments */
+      .slide.dark h1, .slide.red h1, .slide.green h1 { font-size: 22px !important; }
+      .slide img[alt="Gideon Codeworks"] { height: 60px !important; }
     }
   </style>
 </head>
