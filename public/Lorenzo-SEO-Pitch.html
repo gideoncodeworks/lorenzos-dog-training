@@ -1200,6 +1200,9 @@
     const slides = document.querySelectorAll('.slide');
     let currentSlide = 0;
 
+    // Detect mobile/tablet
+    const isMobile = window.matchMedia('(max-width: 1024px)').matches || 'ontouchstart' in window;
+
     document.getElementById('totalSlides').textContent = slides.length;
 
     function updateProgressBar() {
@@ -1213,14 +1216,22 @@
       return [...slide.querySelectorAll('.build, .build-list li')];
     }
 
+    // Show all build items on a slide (for mobile)
+    function showAllBuildItems(slide) {
+      const items = getBuildItems(slide);
+      items.forEach(item => item.classList.add('visible'));
+    }
+
     // Reset all build items in a slide to hidden
     function resetBuildItems(slide) {
+      if (isMobile) return; // Don't reset on mobile
       const items = getBuildItems(slide);
       items.forEach(item => item.classList.remove('visible'));
     }
 
     // Show next hidden build item, return true if there was one
     function showNextBuildItem() {
+      if (isMobile) return false; // Skip builds on mobile
       const slide = slides[currentSlide];
       const items = getBuildItems(slide);
       const hiddenItem = items.find(item => !item.classList.contains('visible'));
@@ -1263,11 +1274,21 @@
       slides[currentSlide].style.opacity = '1';
       slides[currentSlide].style.transform = 'translateX(0)';
 
+      // On mobile, show all build items immediately
+      if (isMobile) {
+        showAllBuildItems(slides[currentSlide]);
+      }
+
       document.getElementById('currentSlide').textContent = currentSlide + 1;
       updateProgressBar();
     }
 
     function goForward() {
+      // On mobile, just go to next slide
+      if (isMobile) {
+        showSlide(currentSlide + 1, 1);
+        return;
+      }
       // First try to show the next build item
       if (!showNextBuildItem()) {
         // If no more build items, go to next slide
@@ -1308,10 +1329,35 @@
       }
     });
 
+    // Touch swipe support for mobile
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    document.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    });
+
+    document.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      const diff = touchStartX - touchEndX;
+      if (Math.abs(diff) > 50) { // Minimum swipe distance
+        if (diff > 0) {
+          showSlide(currentSlide + 1, 1); // Swipe left = next
+        } else {
+          showSlide(currentSlide - 1, -1); // Swipe right = prev
+        }
+      }
+    });
+
     // Initialize
     updateProgressBar();
     slides[0].style.opacity = '1';
     slides[0].style.transform = 'translateX(0)';
+
+    // On mobile, show all build items on first slide
+    if (isMobile) {
+      showAllBuildItems(slides[0]);
+    }
   </script>
 </body>
 </html>
